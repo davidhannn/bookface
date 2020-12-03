@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import firebase from 'firebase';
 import './create-post.styles.scss';
 
 import VideocamIcon from '@material-ui/icons/Videocam';
@@ -7,7 +10,11 @@ import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 
 import { Avatar } from '@material-ui/core';
 
-const CreatePost = () => {
+import { firestore } from '../../firebase/firebase.utils';
+import { selectCurrentUser } from '../../redux/user/user.selectors';
+
+
+const CreatePost = ({ currentUser }) => {
 
     const [fullPost, setFullPost] = useState({ post: "", imageUrl: ""});
 
@@ -15,6 +22,16 @@ const CreatePost = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        firestore.collection('posts').add({
+            firstName: currentUser.firstName,
+            message: post,
+            lastName: currentUser.lastName,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            image: imageUrl
+        }).catch((error) => console.log(error))
+
+        setFullPost({ post: "", imageUrl: ""})
     }
 
     const handleChange = (e) => {
@@ -26,10 +43,11 @@ const CreatePost = () => {
         <div className="createPost">
             <div className="createPost__top">
                 <Avatar />
+
                 <form>
                     <input name="post" value={post} type="text" placeholder={`What's on your mind`} onChange={handleChange}/>
-                    <input name="imageUrl"value={imageUrl} placeholder="Image URL"  />
-                    <button type="button" onClick={handleSubmit}>Hidden Button</button>
+                    <input name="imageUrl" value={imageUrl} placeholder="Image URL" onChange={handleChange} />
+                    <button type="submit" onClick={handleSubmit}>Hidden Button</button>
                 </form>
             </div>
             <div className="createPost__bottom">
@@ -50,4 +68,8 @@ const CreatePost = () => {
     )
 }
 
-export default CreatePost
+
+const mapStateToProps = createStructuredSelector({
+    currentUser: selectCurrentUser
+})
+export default connect(mapStateToProps)(CreatePost);

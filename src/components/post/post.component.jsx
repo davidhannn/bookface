@@ -7,7 +7,7 @@ import { Avatar } from '@material-ui/core';
 
 import './post.styles.scss';
 
-const Post = ({ id, image, message, profilePic, timestamp, username }) => {
+const Post = ({ data: { id, image, message, profilePic, timestamp, firstName, lastName } }) => {
 
   
     return (
@@ -15,8 +15,8 @@ const Post = ({ id, image, message, profilePic, timestamp, username }) => {
             <div className="post__top">
                 <Avatar src={profilePic} className="post__avatar"/>
                 <div className="post__topDetails">
-                    {/* <h3>{username}</h3>
-                    <p>{timestamp}</p> */}
+                    <h3>{`${firstName} ${lastName}`}</h3>
+                    <p>{new Date(timestamp?.toDate()).toUTCString()}</p>
                 </div>
             </div>
             
