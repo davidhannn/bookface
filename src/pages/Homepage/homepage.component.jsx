@@ -5,6 +5,8 @@ import Post from '../../components/post/post.component';
 
 import { auth, firestore } from '../../firebase/firebase.utils';
 
+import './homepage.styles.scss';
+
 const HomePage = () => {
 
     const [posts, setPosts] = useState([]);
