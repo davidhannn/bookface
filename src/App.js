@@ -8,6 +8,7 @@ import { createStructuredSelector } from 'reselect'
 import LoginPage from './pages/AuthPages/LoginPage';
 import RegisterPage from './pages/AuthPages/RegisterPage';
 import HomePage from './pages/Homepage/homepage.component';
+import UserPage from './pages/UserPage/userpage.component';
 
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
@@ -47,9 +48,10 @@ class App extends React.Component {
   return (
     <div className="App">
       <Switch>
-        <Route exact path="/" component={HomePage} />
+        <Route exact path="/" render={() => !this.props.currentUser ? (<Redirect to="/login" />) : (<HomePage />)}  />
         <Route path='/login' render={() => this.props.currentUser ? (<Redirect to="/" />) : (<LoginPage />)} />
         <Route path='/register' component={RegisterPage} />
+        <Route path='/:userId' component={UserPage} />
       </Switch>
     </div>
   );

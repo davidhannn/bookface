@@ -17,6 +17,7 @@ import { Avatar, IconButton } from '@material-ui/core';
 import MessageIcon from '@material-ui/icons/Message';
 import NotificationsIcon from '@material-ui/icons/Notifications'
 
+import DropdownButton from '../dropdown-button/dropdown-button.component';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 
@@ -68,12 +69,15 @@ const Header = ({ currentUser }) => (
                     <NotificationsIcon />
                 </IconButton>
 
-                {
+                {/* {
                     currentUser ? ( <IconButton>
                         <ExpandMoreIcon onClick={() => auth.signOut()} />
                     </IconButton>) : ( <Redirect to="/login" />)
-                }
+                } */}
 
+                <IconButton>
+                    <DropdownButton currentUser={currentUser} />
+                </IconButton>
             </div>
         </div>
  
