@@ -53,8 +53,8 @@ const Header = ({ currentUser }) => (
 
             <div className="header__right">
                 <div className="header__user_info">
-                    <Avatar />
-                    <h4>Test</h4>
+                    <Avatar src={currentUser.profileImgUrl} />
+                    <h4>{currentUser.firstName} {currentUser.lastName}</h4>
                 </div>
 
                 <IconButton>

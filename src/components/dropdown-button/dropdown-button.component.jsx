@@ -8,10 +8,13 @@ import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import { makeStyles } from '@material-ui/core/styles';
+import { Avatar } from '@material-ui/core';
 
 import { auth } from '../../firebase/firebase.utils';
 
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
+import './dropdown-button.styles.scss';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MenuListComposition({ currentUser: { id } }) {
+export default function MenuListComposition({ currentUser: { id, firstName, lastName, profileImgUrl } }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
@@ -85,10 +88,17 @@ export default function MenuListComposition({ currentUser: { id } }) {
                   <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
                       <Link style={{   color: "inherit",
                           textDecoration: "inherit",
-                          backgroundColor: "none",}} to={`/${id}`} >
-                      <MenuItem onClick={handleClose}>Profile</MenuItem>
+                          backgroundColor: "none",}} to={`/user/${id}`} >
+                      <MenuItem onClick={handleClose}>
+                          <div className="dropdown__profile">
+                          <Avatar src={profileImgUrl} />
+                          <div className="dropdown__profileInfo">
+                                <h5>{firstName} {lastName}</h5>
+                                <p>See your Profile</p> 
+                          </div>
+                          </div>
+                      </MenuItem>
                       </Link>
-                
                     <MenuItem onClick={() => auth.signOut()}>Logout</MenuItem>
                   </MenuList>
                 </ClickAwayListener>

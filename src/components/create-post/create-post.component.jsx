@@ -42,7 +42,7 @@ const CreatePost = ({ currentUser }) => {
     return (
         <div className="createPost">
             <div className="createPost__top">
-                <Avatar />
+                <Avatar src={currentUser.profileImgUrl}/>
 
                 <form>
                     <input name="post" value={post} type="text" placeholder={`What's on your mind`} onChange={handleChange}/>

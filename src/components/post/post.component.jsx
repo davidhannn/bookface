@@ -21,7 +21,7 @@ const Post = ({ data: { id, image, message, profilePic, timestamp, firstName, la
             </div>
             
             <div className="post__body">
-                <h2>{message}</h2>
+                <p>{message}</p>
             </div>
 
             <div className="post__image">

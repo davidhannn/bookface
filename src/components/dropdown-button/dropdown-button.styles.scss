@@ -1,0 +1,9 @@
+.dropdown__profile {
+  display: flex;
+  flex-direction: row;
+  margin-right: 160px;
+  border-bottom: 1px solid gray;
+  .dropdown__profileInfo {
+    padding-left: 15px;
+  }
+}
