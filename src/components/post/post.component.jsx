@@ -1,14 +1,48 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import ShareIcon from '@material-ui/icons/Share';
 import { Avatar } from '@material-ui/core';
 
+import Comment from '../comment/comment.component';
+
+import { firestore } from '../../firebase/firebase.utils'
+
 import './post.styles.scss';
 
-const Post = ({ data: { id, image, message, profilePic, timestamp, firstName, lastName } }) => {
+const Post = ({ id, data: { image, message, profilePic, timestamp, firstName, lastName } }) => {
 
+    const [comment, setComment] = useState("");
+    const [postCommentList, setPostCommentList ] = useState([]);
+
+    const handleChange = (e) => {
+        setComment(e.target.value)
+    }
+    
+  
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        firestore.collection('posts').doc(id).collection('comments').add({
+            firstName: firstName,
+            lastName: lastName,
+            comment: comment,
+            image: image,
+            id: id
+        })
+
+    }
+
+    useEffect(() => {
+        firestore.collection('posts').doc(id).collection('comments').onSnapshot((snapshot) => {
+            setPostCommentList(snapshot.docs.map((doc) => ({
+                id: doc.id,
+                data: doc.data()
+            })))
+        })
+
+    }, [postCommentList])
   
     return (
         <div className="post">
@@ -41,6 +75,19 @@ const Post = ({ data: { id, image, message, profilePic, timestamp, firstName, la
                     <ShareIcon />
                     <p>Share</p>
                 </div>
+            </div>
+
+            {
+                postCommentList.map((comment, id) => (
+                    <Comment id={id} comment={comment.data}/>
+                ))
+            }
+            <div className="post__comment">
+                <Avatar src={profilePic} className="post__commentAvatar"/>
+                <form>
+                    <input type="text" placeholder="Write a comment..." onChange={handleChange}/>
+                    <button type="submit" onClick={handleSubmit}>Hidden Button</button>
+                </form>
             </div>
         </div>
     )
