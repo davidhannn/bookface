@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux'
 import { auth } from '../../firebase/firebase.utils';
 
 import FormInput from '../../components/form-input/form-input.component'
 import CustomButton from '../../components/custom-button/custom-button.component';
 
-const LoginPage = () => {
+import { googleSignInStart, emailSignInStart } from '../../redux/user/user.actions';
+
+const LoginPage = ({ googleSignInStart, emailSignInStart }) => {
     const [loginCredentials, setLoginCredentials] = useState({ email: '', password: '' })
 
     const { email, password } = loginCredentials;
@@ -17,12 +20,13 @@ const LoginPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        try {
-            await auth.signInWithEmailAndPassword(email, password);
-            setLoginCredentials({ email: "", password: ""})
-        } catch(error) {
-            console.error(error);
-        }
+        emailSignInStart(email, password)
+        // try {
+        //     await auth.signInWithEmailAndPassword(email, password);
+        //     setLoginCredentials({ email: "", password: ""})
+        // } catch(error) {
+        //     console.error(error);
+        // }
     }
 
     return (
@@ -38,4 +42,9 @@ const LoginPage = () => {
     )
 }
 
-export default LoginPage
+const mapDispatchToProps = dispatch => ({
+    googleSignInStart: () => dispatch(googleSignInStart()),
+    emailSignInStart: (email, password) => dispatch(emailSignInStart({ email, password }))
+})
+
+export default connect(null, mapDispatchToProps)(LoginPage);
