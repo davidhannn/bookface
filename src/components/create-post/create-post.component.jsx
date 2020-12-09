@@ -25,10 +25,12 @@ const CreatePost = ({ currentUser }) => {
 
         firestore.collection('posts').add({
             firstName: currentUser.firstName,
-            message: post,
             lastName: currentUser.lastName,
+            userId: currentUser.id,
+            message: post,
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-            image: imageUrl
+            image: imageUrl,
+            likes: 0,
         }).catch((error) => console.log(error))
 
         setFullPost({ post: "", imageUrl: ""})

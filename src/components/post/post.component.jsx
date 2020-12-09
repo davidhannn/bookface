@@ -1,20 +1,63 @@
 import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux';
 
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import ShareIcon from '@material-ui/icons/Share';
 import { Avatar } from '@material-ui/core';
+import { IconButton } from '@material-ui/core';
 
 import Comment from '../comment/comment.component';
 
 import { firestore } from '../../firebase/firebase.utils'
 
 import './post.styles.scss';
+import { createStructuredSelector } from 'reselect';
 
-const Post = ({ id, data: { image, message, profilePic, timestamp, firstName, lastName } }) => {
+import { selectCurrentUser } from '../../redux/user/user.selectors'
+
+const Post = ({ id, currentUser, data: { userId, image, message, profilePic, timestamp, firstName, lastName, likes } }) => {
 
     const [comment, setComment] = useState("");
     const [postCommentList, setPostCommentList ] = useState([]);
+    const [liked, setLiked] = useState(false);
+
+    const handleLike = () => {
+        
+        if(liked === false) {
+            firestore.collection('posts').doc(id).get().then(doc => {
+                const docData = doc.data();
+                
+                firestore.collection('posts').doc(id).collection('postLikes').doc(currentUser.id).set({
+                    currentUser: currentUser.id,
+                    firstName: currentUser.firstName,
+                    lastName: currentUser.lastName
+                })
+
+                    firestore.collection('posts').doc(id).update({
+                        likes: docData.likes + 1
+                    })
+
+            }
+            )
+            setLiked(!liked)
+        } else if (liked === true) { 
+            firestore.collection('posts').doc(id).get().then(doc => {
+                const docData = doc.data()
+
+                firestore.collection('posts').doc(id).collection('postLikes').doc(currentUser.id).delete()
+
+                firestore.collection('posts').doc(id).update({
+                    likes: docData.likes - 1
+                })
+
+            })
+            setLiked(!liked)
+        }
+
+
+    }
+
 
     const handleChange = (e) => {
         setComment(e.target.value)
@@ -62,9 +105,15 @@ const Post = ({ id, data: { image, message, profilePic, timestamp, firstName, la
                 <img src={image} />
             </div>
 
+            <div className="post__like">
+                <p>{likes} Likes</p>
+            </div>
+
             <div className="post__buttons">
                 <div className="post__button">
-                    <ThumbUpIcon />
+                    <IconButton onClick={handleLike}>
+                        <ThumbUpIcon />
+                    </IconButton>
                     <p>Like</p>
                 </div>
                 <div className="post__button">
@@ -93,4 +142,8 @@ const Post = ({ id, data: { image, message, profilePic, timestamp, firstName, la
     )
 }
 
-export default Post
+const mapStateToProps = createStructuredSelector({
+    currentUser: selectCurrentUser
+})
+
+export default connect(mapStateToProps)(Post)
