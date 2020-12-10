@@ -11,7 +11,7 @@ import PostActionTypes from './post.types';
 export function* onFetchPost() { 
 
     try {
-        const postRef = yield firestore.collection('posts');
+        const postRef = yield firestore.collection('posts').orderBy("timestamp", "desc");
         const snapshot = yield postRef.get();
         console.log(snapshot);
         const posts = yield call(convertCollectionsSnapshotToMap, snapshot);

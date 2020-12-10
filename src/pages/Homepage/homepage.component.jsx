@@ -16,7 +16,6 @@ import { fetchPostStart } from '../../redux/post/post.actions';
 
 const HomePage = ({ post, fetchPostStart }) => {
 
-    const [posts, setPosts] = useState([]);
 
     useEffect(() => {
         // firestore.collection('posts').orderBy("timestamp", "desc").onSnapshot((snapshot) => {
