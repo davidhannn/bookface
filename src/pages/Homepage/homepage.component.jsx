@@ -1,4 +1,5 @@
 import React, {  useEffect, useState, Fragment } from 'react'
+import { connect } from 'react-redux';
 import Header from '../../components/header/header.component';
 import CreatePost from '../../components/create-post/create-post.component';
 import Post from '../../components/post/post.component';
@@ -6,21 +7,28 @@ import Post from '../../components/post/post.component';
 import { auth, firestore } from '../../firebase/firebase.utils';
 
 import './homepage.styles.scss';
+import { createStructuredSelector } from 'reselect';
 
-const HomePage = () => {
+import { selectAllPosts } from '../../redux/post/post.selectors';
+
+import { fetchPostStart } from '../../redux/post/post.actions';
+
+
+const HomePage = ({ post, fetchPostStart }) => {
 
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        firestore.collection('posts').orderBy("timestamp", "desc").onSnapshot((snapshot) => {
-            setPosts(snapshot.docs.map((doc) => 
-                ({
-                    id: doc.id,
-                    data: doc.data()
-                })
-            ))
-        })
-    }, [posts])
+        // firestore.collection('posts').orderBy("timestamp", "desc").onSnapshot((snapshot) => {
+        //     setPosts(snapshot.docs.map((doc) => 
+        //         ({
+        //             id: doc.id,
+        //             data: doc.data()
+        //         })
+        //     ))
+        // })
+        fetchPostStart()
+    }, [])
 
 
     return (
@@ -29,7 +37,7 @@ const HomePage = () => {
                 <div className="homepage__body">
                     <CreatePost />
                     {
-                        posts.map((post, id) => (
+                        post.map((post, id) => (
                             <Post id={post.id} data={post.data} />
                         ))
                     }
@@ -38,4 +46,12 @@ const HomePage = () => {
     )
 }
 
-export default HomePage
+const mapStateToProps = createStructuredSelector({
+    post: selectAllPosts
+})
+
+const mapDispatchToProps = dispatch => ({
+    fetchPostStart: () => dispatch(fetchPostStart())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
