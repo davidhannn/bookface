@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
@@ -14,6 +15,8 @@ import { auth } from '../../firebase/firebase.utils';
 
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
+import { signOutStart } from '../../redux/user/user.actions';
+
 import './dropdown-button.styles.scss';
 
 const useStyles = makeStyles((theme) => ({
@@ -25,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MenuListComposition({ currentUser: { id, firstName, lastName, profileImgUrl } }) {
+const MenuListComposition = ({ signOutStart, currentUser: { id, firstName, lastName, profileImgUrl } }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
@@ -99,7 +102,7 @@ export default function MenuListComposition({ currentUser: { id, firstName, last
                           </div>
                       </MenuItem>
                       </Link>
-                    <MenuItem onClick={() => auth.signOut()}>Logout</MenuItem>
+                    <MenuItem onClick={() => signOutStart()}>Logout</MenuItem>
                   </MenuList>
                 </ClickAwayListener>
               </Paper>
@@ -110,3 +113,9 @@ export default function MenuListComposition({ currentUser: { id, firstName, last
     // </div>
   );
 }
+
+const mapDispatchToProps = dispatch => ({
+  signOutStart: () => dispatch(signOutStart())
+})
+
+export default connect(null, mapDispatchToProps)(MenuListComposition);
