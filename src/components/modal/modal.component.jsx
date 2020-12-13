@@ -68,9 +68,9 @@ export default function SpringModal() {
 
   return (
     <div>
-      <button type="button" onClick={handleOpen}>
+      <button type="button" onClick={handleOpen} style={{ borderStyle: "none", borderRadius: "999px", border: "none"}}>
         <IconButton>
-            <CameraAltIcon />>
+            <CameraAltIcon fontSize="small" style={{color: "black"}}/>
         </IconButton>
       </button>
       <Modal
@@ -87,8 +87,8 @@ export default function SpringModal() {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <h2 id="spring-modal-title">Spring modal</h2>
-            <p id="spring-modal-description">react-spring animates me.</p>
+            <h2 id="spring-modal-title">Upload Profile Picture</h2>
+            <br />
             <ImageUpload />
           </div>
         </Fade>

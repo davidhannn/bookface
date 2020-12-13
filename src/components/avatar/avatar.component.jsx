@@ -14,8 +14,9 @@ const useStyles = makeStyles((theme) => ({
     height: theme.spacing(3),
   },
   large: {
-    width: theme.spacing(20),
-    height: theme.spacing(20),
+    width: theme.spacing(35),
+    height: theme.spacing(35),
+    border: "5px solid white"
   },
 }));
 
@@ -24,7 +25,7 @@ const ImageAvatar = ({ imgUrl }) => {
 
   return (
     <div className={classes.root}>
-      <Avatar alt="" src={imgUrl} className={classes.large} />
+      <Avatar alt="" src={imgUrl} className={classes.large}/>
     </div>
   );
 }

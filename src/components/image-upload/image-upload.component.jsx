@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
 
 import { firestore, storage } from '../../firebase/firebase.utils';
 
 import firebase from 'firebase';
+import { selectCurrentUser } from '../../redux/user/user.selectors';
 
-const ImageUpload = ({ id: { userId } }) => {
+const ImageUpload = ({ currentUser: { id }}) => {
 
-    console.log(userId);
+    console.log(id);
     const allInputs = { imgUrl: ''};
 
     const [file, setFile] = useState(null);
@@ -27,7 +30,7 @@ const ImageUpload = ({ id: { userId } }) => {
             .then((url) => {
                 firestore
                 .collection('users')
-                .doc(`${userId}`)
+                .doc(`${id}`)
                 .update({
                     profileImgUrl: url
                 })
@@ -43,11 +46,15 @@ const ImageUpload = ({ id: { userId } }) => {
         <div>
         <form onSubmit={handleUpload}>
           <input type="file" onChange={handleChange} />
-          <button disabled={!file}>upload to firebase</button>
+          <button disabled={!file}>Upload Photo</button>
         </form>
         <img src={url} alt="" />
       </div>
     )
 }
 
-export default ImageUpload
+const mapStateToProps = createStructuredSelector({
+   currentUser: selectCurrentUser
+})
+
+export default connect(mapStateToProps)(ImageUpload);

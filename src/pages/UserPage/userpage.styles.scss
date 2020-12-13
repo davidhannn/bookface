@@ -1,10 +1,20 @@
-// .userpage__header {
-//     width: 80%;
-// }
+.userpage__header {
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(180deg, #3b5998, #FFFFFF);
+    padding: 30px 30px;
+}
 
-// .userpage__avatar {
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//     flex: 1;
-// }
+.userpage__headerProfile {
+    position: relative;
+}
+
+.userpage__headerProfileCameraIcon {
+    position: absolute;
+    bottom: 1px;
+    right: 1px;
+}
