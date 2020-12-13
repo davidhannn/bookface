@@ -13,8 +13,10 @@ import { Avatar } from '@material-ui/core';
 import { firestore } from '../../firebase/firebase.utils';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 
+import { createPostStart } from '../../redux/post/post.actions';
 
-const CreatePost = ({ currentUser }) => {
+
+const CreatePost = ({ currentUser, createPostStart }) => {
 
     const [fullPost, setFullPost] = useState({ post: "", imageUrl: ""});
 
@@ -22,17 +24,7 @@ const CreatePost = ({ currentUser }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        firestore.collection('posts').add({
-            firstName: currentUser.firstName,
-            lastName: currentUser.lastName,
-            userId: currentUser.id,
-            message: post,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-            image: imageUrl,
-            likes: 0,
-        }).catch((error) => console.log(error))
-
+        createPostStart(currentUser, fullPost)
         setFullPost({ post: "", imageUrl: ""})
     }
 
@@ -74,4 +66,9 @@ const CreatePost = ({ currentUser }) => {
 const mapStateToProps = createStructuredSelector({
     currentUser: selectCurrentUser
 })
-export default connect(mapStateToProps)(CreatePost);
+
+const mapDispatchToProps = dispatch => ({
+    createPostStart: (currentUser, fullPost) => dispatch(createPostStart({currentUser, fullPost}))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreatePost);

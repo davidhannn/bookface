@@ -1,14 +1,15 @@
 import { takeLatest, put, all, call } from 'redux-saga/effects';
 
 import { firestore, storage, auth, convertCollectionsSnapshotToMap } from '../../firebase/firebase.utils';
+import firebase from 'firebase'
 
-import { fetchPostSuccess, fetchPostFailure } from './post.actions';
+import { fetchPostSuccess, fetchPostFailure, createPostSuccess, createPostFailure } from './post.actions';
 
 import { snapShotToArray } from '../../utils/helperFunctions';
 
 import PostActionTypes from './post.types';
 
-export function* onFetchPost() { 
+export function* fetchPost() { 
 
     try {
         const postRef = yield firestore.collection('posts').orderBy("timestamp", "desc");
@@ -30,11 +31,32 @@ export function* onFetchPost() {
     // })
 }
 
-export function* onFetchPostCollectionStart() {
-    yield takeLatest(PostActionTypes.FETCH_POST_START, onFetchPost)
+export function* createPost({ payload: { currentUser, fullPost } }) {
+    try {
+        const createPostRef = yield firestore.collection('posts').add({
+            firstName: currentUser.firstName,
+            lastName: currentUser.lastName,
+            userId: currentUser.id,
+            message: fullPost.post,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            image: fullPost.imageUrl,
+            likes: 0,
+        })
+
+        yield put(createPostSuccess(true));
+    } catch(error) {
+        yield put(createPostFailure(error))
+    }
 }
 
+export function* onFetchPostCollectionStart() {
+    yield takeLatest(PostActionTypes.FETCH_POST_START, fetchPost)
+}
+
+export function* onCreatePostStart() {
+    yield takeLatest(PostActionTypes.CREATE_POST_START, createPost)
+}
 
 export function* postSagas() {
-    yield all([call(onFetchPostCollectionStart)])
+    yield all([call(onFetchPostCollectionStart), call(onCreatePostStart)])
 }

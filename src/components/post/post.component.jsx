@@ -75,6 +75,8 @@ const Post = ({ id, currentUser, data: { userId, image, message, profilePic, tim
             id: id
         })
 
+        setComment("")
+
     }
 
     useEffect(() => {
@@ -88,7 +90,7 @@ const Post = ({ id, currentUser, data: { userId, image, message, profilePic, tim
     }, [postCommentList])
   
     return (
-        <div className="post">
+        <div className="post" id={id}>
             <div className="post__top">
                 <Avatar src={profilePic} className="post__avatar"/>
                 <div className="post__topDetails">

@@ -4,17 +4,24 @@ import { createStructuredSelector } from 'reselect';
 import ImageUpload from '../../components/image-upload/image-upload.component';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 
-import { Avatar } from '@material-ui/core';
+import { IconButton, Avatar } from '@material-ui/core';
+import CameraModel from '../../components/modal/modal.component';
+import ImageAvatar from '../../components/avatar/avatar.component'
+
+import './userpage.styles.scss';
 
 const UserPage = ({ match, currentUser }) => {
 
-    const { firstName, lastName, profileImgUrl } = currentUser;
+    const {  profileImgUrl } = currentUser;
     return (
         <div>
             <div className="userpage__header">
-                <Avatar src={profileImgUrl} />
+
+                        <ImageAvatar imgUrl={profileImgUrl} />
+
             </div>
-            <ImageUpload id={match.params} />
+            {/* <ImageUpload id={match.params} /> */}
+            <CameraModel />
         </div>
     )
 }
