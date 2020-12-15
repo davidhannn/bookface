@@ -14,50 +14,55 @@ import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
 import { setCurrentUser, checkUserSession } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selectors';
+import { CheckCircleOutline } from '@material-ui/icons';
 
-class App extends React.Component {
+const App = ({ checkUserSession, currentUser }) => {
 
-  unsubscribeFromAuth = null;
+  useEffect(() => {
+    checkUserSession()
+  }, [])
 
-  componentDidMount() {
+  // unsubscribeFromAuth = null;
 
-    const { checkUserSession } = this.props;
-    checkUserSession();
-    // const { setCurrentUser } = this.props;
+  // componentDidMount() {
 
-    // this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-    //   if (userAuth) {
-    //     const userRef = await createUserProfileDocument(userAuth);
+  //   const { checkUserSession } = this.props;
+  //   checkUserSession();
+  //   // const { setCurrentUser } = this.props;
 
-    //     userRef.onSnapshot(snapShot => {
-    //         setCurrentUser({
-    //           id: snapShot.id,
-    //           ...snapShot.data()
-    //         })
-    //       });
+  //   // this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+  //   //   if (userAuth) {
+  //   //     const userRef = await createUserProfileDocument(userAuth);
+
+  //   //     userRef.onSnapshot(snapShot => {
+  //   //         setCurrentUser({
+  //   //           id: snapShot.id,
+  //   //           ...snapShot.data()
+  //   //         })
+  //   //       });
         
-    //   }
-    //   setCurrentUser(userAuth)
-    // })
-  }
+  //   //   }
+  //   //   setCurrentUser(userAuth)
+  //   // })
+  // }
 
-  componentWillUnmount() {
-    this.unsubscribeFromAuth();
-  }
+  // componentWillUnmount() {
+  //   this.unsubscribeFromAuth();
+  // }
 
 
- render () {
+ 
   return (
     <div className="App">
       <Switch>
-        <Route exact path="/" render={() => !this.props.currentUser ? (<Redirect to="/login" />) : (<HomePage />)}  />
-        <Route path='/login' render={() => this.props.currentUser ? (<Redirect to="/" />) : (<LoginPage />)} />
+        <Route exact path="/" render={() => currentUser ? (<HomePage />) : (<Redirect to="/login" />) }  />
+        <Route path='/login' render={() => currentUser ? (<Redirect to="/" />) : (<LoginPage />)} />
         <Route path='/register' component={RegisterPage} />
         <Route path='/user/:userId' component={UserPage} />
       </Switch>
     </div>
   );
- }
+ 
 
 }
 
