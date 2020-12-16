@@ -1,0 +1,35 @@
+.custom-facebook-button {
+    display: flex;
+    align-items: center;
+    padding: 0px 12px;
+    margin: 6px 0px;
+    border-style: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-radius: 6px;
+    border: 0px;
+    background-color: transparent;
+    cursor: pointer;
+    height: 50px;
+
+
+    &.active {
+        color: #3578E5;
+        border-bottom: 4px solid #2e81f4;
+    }
+    // .MuiSvgIcon-root {
+    //   color: gray;
+
+    //   &:hover {
+    //     color: #2e81f4;
+    //     cursor: pointer;
+    //   }
+    // }
+
+    // &.header__icon--active {
+    //   border-bottom: 4px solid #2e81f4;
+
+    //   .MuiSvgIcon-root {
+    //     color: #2e81f4;
+    //   }
+}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
@@ -28,10 +29,14 @@ const Post = ({ id, currentUser, data: { userId, image, message, profilePic, tim
             firestore.collection('posts').doc(id).get().then(doc => {
                 const docData = doc.data();
                 
-                firestore.collection('posts').doc(id).collection('postLikes').doc(currentUser.id).set({
-                    currentUser: currentUser.id,
-                    firstName: currentUser.firstName,
-                    lastName: currentUser.lastName
+                firestore.collection('posts').doc(id).collection('postLikes').doc(currentUser.id).get().then(doc2 => {
+                    if (doc2.data()) {
+                        console.log(doc2.data())
+                    } else {
+                        firestore.collection('posts').doc(id).collection('likes').doc(currentUser.id).set({
+                            likes: 1
+                        })
+                    }
                 })
 
                     firestore.collection('posts').doc(id).update({
@@ -94,7 +99,9 @@ const Post = ({ id, currentUser, data: { userId, image, message, profilePic, tim
             <div className="post__top">
                 <Avatar src={profilePic} className="post__avatar"/>
                 <div className="post__topDetails">
+                    <Link to={`/user/${userId}`} >
                     <h3>{`${firstName} ${lastName}`}</h3>
+                    </Link>
                     <p>{new Date(timestamp?.toDate()).toUTCString()}</p>
                 </div>
             </div>

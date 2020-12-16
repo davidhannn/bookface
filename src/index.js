@@ -11,11 +11,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(
   <Provider store={store}>
-    <HashRouter>
+    <BrowserRouter>
       {/* <PersistGate persistor={persistor}> */}
       <App />
       {/* </PersistGate> */}
-    </HashRouter>
+    </BrowserRouter>
   </Provider>,
   document.getElementById('root')
 );

@@ -11,3 +11,8 @@ export const selectAllPostsFetching = createSelector(
     [selectPost],
     post => post.isFetching
 )
+
+// export const selectPostLikes = createSelector(
+//     [selectPost],
+//     post => post.posts.
+// )
