@@ -17,6 +17,7 @@ import './userpage.styles.scss';
 import { firestore } from '../../firebase/firebase.utils';
 
 const UserPage = ({ match, currentUser }) => {
+    const [user, setUser] = useState({})
     const [loading, setLoading] = useState(true)
     const [userPosts, setUserPosts] = useState([]);
     const [activeButton, setActiveButton] = useState({
@@ -24,8 +25,7 @@ const UserPage = ({ match, currentUser }) => {
         objects: [{ id : "Posts" }, { id: "About" }, { id: "Friends" }, { id: "Photos" }]
     })
 
-    const {  profileImgUrl, firstName, lastName, id } = currentUser;
-
+    const {  profileImgUrl, firstName, lastName } = user;
     const toggleActive = (idx) => {
         setActiveButton({ ...activeButton, activeObject: activeButton.objects[idx]})
     }
@@ -41,7 +41,11 @@ const UserPage = ({ match, currentUser }) => {
 
 
     useEffect(() => {
-        firestore.collection('posts').where("userId", "==", id).onSnapshot((snapshot) => {
+        firestore.collection('users').doc(match.params.userId).get().then(doc => {
+            setUser(doc.data());
+        })
+
+        firestore.collection('posts').where("userId", "==", match.params.userId).onSnapshot((snapshot) => {
             setUserPosts(snapshot.docs.map((doc) => ({
                 id: doc.id,
                 data: doc.data()
