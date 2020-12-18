@@ -1,0 +1,15 @@
+.user-card {
+    display: flex;
+    flex-direction: row;
+    height: 100px;
+    margin-top: 10px;
+    padding: 30px 30px;
+    border-bottom: 1px solid gray;
+    .user-card-avatar {
+        margin-right: 20px;
+    }
+}
+
+h6 {
+    font-weight: bold;
+}

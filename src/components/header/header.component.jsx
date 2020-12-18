@@ -17,6 +17,8 @@ import { Avatar, IconButton } from '@material-ui/core';
 import MessageIcon from '@material-ui/icons/Message';
 import NotificationsIcon from '@material-ui/icons/Notifications'
 
+import Search from '../search/search.component';
+
 import DropdownButton from '../dropdown-button/dropdown-button.component';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
@@ -30,10 +32,9 @@ const Header = ({ currentUser }) => (
                 <Link to="/">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/1920px-Facebook_f_logo_%282019%29.svg.png" />
                 </Link>
-                <div className="header__input">
-                    <SearchIcon />
-                    <input type="text" placeholder="Search Facebook"/>
-                </div>
+                {/* <div className="header__input"> */}
+                    <Search />
+                {/* </div> */}
             </div>
 
             <div className="header__middle">
@@ -55,10 +56,12 @@ const Header = ({ currentUser }) => (
             </div>
 
             <div className="header__right">
+                <Link to={`/user/${currentUser.id}`} >
                 <div className="header__user_info">
                     <Avatar src={currentUser.profileImgUrl} />
                     <h4>{currentUser.firstName} {currentUser.lastName}</h4>
                 </div>
+                </Link>
 
                 <IconButton>
                     <AddIcon />

@@ -7,8 +7,9 @@ import { createStructuredSelector } from 'reselect'
 
 import LoginPage from './pages/AuthPages/LoginPage';
 import RegisterPage from './pages/AuthPages/RegisterPage';
-import HomePage from './pages/Homepage/homepage.component';
+import HomePage from './pages/HomePage/homepage.component';
 import UserPage from './pages/UserPage/userpage.component';
+import SearchPage from './pages/SearchPage/searchpage.component';
 
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
@@ -59,6 +60,7 @@ const App = ({ checkUserSession, currentUser }) => {
         <Route path='/login' render={() => currentUser ? (<Redirect to="/" />) : (<LoginPage />)} />
         <Route path='/register' component={RegisterPage} />
         <Route path='/user/:userId' component={UserPage} />
+        <Route path='/search/:text' component={SearchPage} />
       </Switch>
     </div>
   );
