@@ -18,6 +18,7 @@ import MessageIcon from '@material-ui/icons/Message';
 import NotificationsIcon from '@material-ui/icons/Notifications'
 
 import Search from '../search/search.component';
+import NotificationIcon from '../notification-icon/notification-icon.component';
 
 import DropdownButton from '../dropdown-button/dropdown-button.component';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -70,10 +71,8 @@ const Header = ({ currentUser }) => (
                 <IconButton>
                     <MessageIcon />
                 </IconButton>
-
-                <IconButton>
-                    <NotificationsIcon />
-                </IconButton>
+                
+                <NotificationIcon />
 
                 {/* {
                     currentUser ? ( <IconButton>

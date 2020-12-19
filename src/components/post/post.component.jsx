@@ -10,6 +10,7 @@ import { IconButton } from '@material-ui/core';
 
 import Comment from '../comment/comment.component';
 
+import firebase from 'firebase';
 import { firestore } from '../../firebase/firebase.utils'
 
 import './post.styles.scss';
@@ -35,6 +36,16 @@ const Post = ({ id, currentUser, data: { userId, image, message, profilePic, tim
                     } else {
                         firestore.collection('posts').doc(id).collection('likes').doc(currentUser.id).set({
                             likes: 1
+                        })
+
+                        firestore.collection('notifications').add({
+                            read: false,
+                            postId: id,
+                            sender: currentUser.id,
+                            senderFirstName: currentUser.firstName,
+                            senderLastName: currentUser.lastName,
+                            recipient: userId,
+                            createdAt: firebase.firestore.FieldValue.serverTimestamp()
                         })
                     }
                 })

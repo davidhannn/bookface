@@ -21,8 +21,7 @@ const SearchPage = ({ match }) => {
             )}
         )
 
-        console.log(searchedUsers)
-    }, [searchedUsers])
+    }, [])
 
 
     return (

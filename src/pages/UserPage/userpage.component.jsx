@@ -9,9 +9,11 @@ import Spinner from '../../components/spinner/spinner.component';
 import { IconButton, Avatar } from '@material-ui/core';
 import CameraModel from '../../components/modal/modal.component';
 import ImageAvatar from '../../components/avatar/avatar.component'
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
 
 import Post from '../../components/post/post.component';
 import CustomFacebookButton from '../../components/custom-facebook-button/custom-facebook-button'
+import AddFriendButton from '../../components/add-friend-button/add-friend-button';
 
 import './userpage.styles.scss';
 import { firestore } from '../../firebase/firebase.utils';
@@ -81,7 +83,7 @@ const UserPage = ({ match, currentUser }) => {
                         </div>
 
                         <div className="userpage__headerBottomButtonsRight">
-                            <button>Add Friend</button>
+                            <AddFriendButton receiverId={match.params.userId} />
                             <button>Message</button>
                         </div>
                     </div>
