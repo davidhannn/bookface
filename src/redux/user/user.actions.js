@@ -52,3 +52,17 @@ export const signOutFailure = (error) => ({
     type: UserActionTypes.SIGN_OUT_FAILURE,
     payload: error
 })
+
+export const fetchNotificationsStart = () => ({
+    type: UserActionTypes.FETCH_NOTIFICATIONS_START
+})
+
+export const fetchNotificationsSuccess = (notifications) => ({
+    type: UserActionTypes.FETCH_NOTIFICATIONS_SUCCESS,
+    payload: notifications
+})
+
+export const fetchNotificationsFailure = (error) => ({
+    type: UserActionTypes.FETCH_NOTIFICATIONS_FAILURE,
+    payload: error
+})

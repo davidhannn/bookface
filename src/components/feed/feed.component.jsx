@@ -16,7 +16,7 @@ const Feed = ({ post, fetchPostStart }) => {
 
     const [posts, setPosts] = useState([]);
     useEffect(() => {
-        firestore.collection('posts').orderBy("timestamp", "desc").onSnapshot((snapshot) => {
+        firestore.collection('posts').orderBy("timestamp", "desc").limit(15).onSnapshot((snapshot) => {
             setPosts(snapshot.docs.map((doc) => 
                 ({
                     id: doc.id,
@@ -32,7 +32,7 @@ const Feed = ({ post, fetchPostStart }) => {
                 <div className="feed">
                     {
                         posts.map((post, id) => (
-                            <Post id={post.id} data={post.data} />
+                            <Post key={post.id} data={post.data} id={post.id}/>
                         ))
                     }
                 </div>

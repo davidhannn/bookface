@@ -73,10 +73,6 @@ const UserPage = ({ match, currentUser }) => {
                 <div className="userpage__headerBottom">
                     <div className="userpage__headerBottomButtons">
                         <div className="userpage__headerBottomButtonsLeft">
-                            {/* <CustomFacebookButton onClick={(e) => handleClick(e)} buttonStyle={activeButton ? "active" : null}>Timeline</CustomFacebookButton>
-                            <CustomFacebookButton onClick={(e) => handleClick(e)} buttonStyle={activeButton ? "active" : null}>About</CustomFacebookButton>
-                            <CustomFacebookButton onClick={(e) => handleClick(e)} buttonStyle={activeButton ? "active" : null}>Friends</CustomFacebookButton>
-                            <CustomFacebookButton onClick={(e) => handleClick(e)} buttonStyle={activeButton ? "active" : null}>Photos</CustomFacebookButton> */}
                             {activeButton.objects.map((el, idx) => (
                                 <button key={idx} className={toggleActiveStyles(idx)} onClick={() => toggleActive(idx) } >{el.id}</button>
                         ))}

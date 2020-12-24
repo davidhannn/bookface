@@ -2,7 +2,8 @@ import UserActionTypes from './user.types';
 
 const INITIAL_STATE = {
     currentUser: null,
-    error: null
+    error: null,
+    notifications: []
 }
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -15,6 +16,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
             }
         case UserActionTypes.SIGN_IN_FAILURE:
         case UserActionTypes.SIGN_OUT_FAILURE:
+        case UserActionTypes.FETCH_NOTIFICATIONS_FAILURE:
             return {
                 ...state,
                 error: action.payload
@@ -28,6 +30,11 @@ const userReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 currentUser: null
+            }
+        case UserActionTypes.FETCH_NOTIFICATIONS_SUCCESS:
+            return {
+                ...state,
+                notifications: [...action.payload]
             }
         default: 
             return state

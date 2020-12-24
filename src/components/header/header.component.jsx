@@ -72,7 +72,7 @@ const Header = ({ currentUser }) => (
                     <MessageIcon />
                 </IconButton>
                 
-                <NotificationIcon />
+                <NotificationIcon userId={currentUser.id} />
 
                 {/* {
                     currentUser ? ( <IconButton>
@@ -80,9 +80,9 @@ const Header = ({ currentUser }) => (
                     </IconButton>) : ( <Redirect to="/login" />)
                 } */}
 
-                <IconButton>
+                {/* <IconButton> */}
                     <DropdownButton currentUser={currentUser} />
-                </IconButton>
+                {/* </IconButton> */}
             </div>
         </div>
  

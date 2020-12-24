@@ -41,6 +41,7 @@ export function* createPost({ payload: { currentUser, fullPost } }) {
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
             image: fullPost.imageUrl,
             likes: 0,
+            userLikeIds: []
         })
 
         yield put(createPostSuccess(true));

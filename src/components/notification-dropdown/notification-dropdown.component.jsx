@@ -87,7 +87,7 @@ export default function MenuListComposition({ id, notifications, number }) {
 
                           </MenuItem>
                       ))}
-                      {console.log(notifications[0].data.recipient)}
+                      {console.log(notifications[0].data)}
                     {/* <MenuItem onClick={handleClose}>Profile</MenuItem>
                     <MenuItem onClick={handleClose}>My account</MenuItem>
                     <MenuItem onClick={handleClose}>Logout</MenuItem> */}

@@ -27,49 +27,79 @@ const Post = ({ id, currentUser, data: { userId, image, message, profilePic, tim
     const handleLike = () => {
         
         if(liked === false) {
+
             firestore.collection('posts').doc(id).get().then(doc => {
-                const docData = doc.data();
-                
-                firestore.collection('posts').doc(id).collection('postLikes').doc(currentUser.id).get().then(doc2 => {
-                    if (doc2.data()) {
-                        console.log(doc2.data())
-                    } else {
-                        firestore.collection('posts').doc(id).collection('likes').doc(currentUser.id).set({
-                            likes: 1
-                        })
+                    const data = doc.data();
+                    console.log(data);
 
-                        firestore.collection('notifications').add({
-                            read: false,
-                            postId: id,
-                            sender: currentUser.id,
-                            senderFirstName: currentUser.firstName,
-                            senderLastName: currentUser.lastName,
-                            recipient: userId,
-                            createdAt: firebase.firestore.FieldValue.serverTimestamp()
-                        })
-                    }
-                })
-
+                    const what = firestore.collection('posts').doc(id).where('userLikeIds', 'contains', '3etawegaweg').get().onSnapshot((snapshot) => console.log(snapshot));
+                    console.log(what);
                     firestore.collection('posts').doc(id).update({
-                        likes: docData.likes + 1
+                        userLikeIds: firebase.firestore.FieldValue.arrayUnion(currentUser.id)
                     })
 
-            }
+                    firestore.collection('posts').doc(id).update({
+                        likes: data.likes + 1
+                    })
+                    
+                }
             )
             setLiked(!liked)
-        } else if (liked === true) { 
-            firestore.collection('posts').doc(id).get().then(doc => {
-                const docData = doc.data()
+            }
+         else {
 
-                firestore.collection('posts').doc(id).collection('postLikes').doc(currentUser.id).delete()
-
-                firestore.collection('posts').doc(id).update({
-                    likes: docData.likes - 1
-                })
-
+            firestore.collection('posts').doc(id).update({
+                userLikeIds: firebase.firestore.FieldValue.arrayRemove(currentUser.id)
             })
+
             setLiked(!liked)
+
         }
+
+        // if(liked === false) {
+        //     firestore.collection('posts').doc(id).get().then(doc => {
+        //         const docData = doc.data();
+
+                
+                
+        //         firestore.collection('posts').doc(id).collection('postLikes').doc(currentUser.id).get().then(doc2 => {
+        //             if (doc2.data()) {
+        //                 console.log(doc2.data())
+        //             } else {
+        //                 firestore.collection('posts').doc(id).collection('likes').doc(currentUser.id).set({
+        //                     likes: 1
+        //                 })
+
+        //                 firestore.collection('notifications').add({
+        //                     read: false,
+        //                     postId: id,
+        //                     sender: currentUser.id,
+        //                     recipient: userId,
+        //                     createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        //                 })
+        //             }
+        //         })
+
+        //             firestore.collection('posts').doc(id).update({
+        //                 likes: docData.likes + 1
+        //             })
+
+        //     }
+        //     )
+        //     setLiked(!liked)
+        // } else if (liked === true) { 
+        //     firestore.collection('posts').doc(id).get().then(doc => {
+        //         const docData = doc.data()
+
+        //         firestore.collection('posts').doc(id).collection('postLikes').doc(currentUser.id).delete()
+
+        //         firestore.collection('posts').doc(id).update({
+        //             likes: docData.likes - 1
+        //         })
+
+        //     })
+        //     setLiked(!liked)
+        // }
 
 
     }

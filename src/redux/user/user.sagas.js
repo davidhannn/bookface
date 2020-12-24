@@ -1,10 +1,12 @@
-import { takeLatest, put, all, call } from 'redux-saga/effects';
+import { takeLatest, put, all, call, select  } from 'redux-saga/effects';
+
+import * as selectors from './user.selectors';
 
 import UserActionTypes from './user.types';
 
-import { signInSuccess, signInFailure, signOutSuccess, signOutFailure } from './user.actions'
+import { signInSuccess, signInFailure, signOutSuccess, signOutFailure, fetchNotificationsSuccess, fetchNotificationsFailure } from './user.actions'
 
-import { auth, googleProvider, createUserProfileDocument, getCurrentUser } from '../../firebase/firebase.utils';
+import { auth, firestore, googleProvider, createUserProfileDocument, getCurrentUser, convertCollectionsSnapshotToMap } from '../../firebase/firebase.utils';
 
 export function* getSnapshotFromUserAuth(userAuth, additionalData) {
     try {
@@ -63,6 +65,20 @@ export function* signOut() {
     }
 }
 
+export function* fetchNotifications() {
+    try {
+        const user = yield select(selectors.selectCurrentUser);
+        console.log(user);
+        const notificationsRef = yield firestore.collection('notifications').where('recipient', '==', user.id)
+        const snapshot = yield notificationsRef.get();
+        console.log(snapshot);
+        const notifications = yield call(convertCollectionsSnapshotToMap, snapshot)
+        yield put(fetchNotificationsSuccess(notifications))
+    } catch(error) {
+        yield put(fetchNotificationsFailure(error))
+    }
+}
+
 export function* onGoogleSignInStart() {  
     yield takeLatest(UserActionTypes.GOOGLE_SIGN_IN_START, signInWithGoogle)
 }
@@ -80,6 +96,10 @@ export function* onSignOutStart() {
     yield takeLatest(UserActionTypes.SIGN_OUT_START, signOut)
 }
 
+export function* onFetchNotificationsStart() {
+    yield takeLatest(UserActionTypes.FETCH_NOTIFICATIONS_START, fetchNotifications)
+}
+
 export function* userSagas() {
-    yield all([call(onGoogleSignInStart), call(onEmailSignInStart), call(onCheckUserSession), call(onSignOutStart)])
+    yield all([call(onGoogleSignInStart), call(onEmailSignInStart), call(onCheckUserSession), call(onSignOutStart), call(onFetchNotificationsStart)])
 }
