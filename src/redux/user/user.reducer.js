@@ -34,7 +34,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
         case UserActionTypes.FETCH_NOTIFICATIONS_SUCCESS:
             return {
                 ...state,
-                notifications: [...action.payload]
+                notifications: action.payload
             }
         default: 
             return state

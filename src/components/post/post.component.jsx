@@ -18,88 +18,51 @@ import { createStructuredSelector } from 'reselect';
 
 import { selectCurrentUser } from '../../redux/user/user.selectors'
 
-const Post = ({ id, currentUser, data: { userId, image, message, profilePic, timestamp, firstName, lastName, likes } }) => {
+const Post = ({ postId, currentUser, data: { userId, image, message, profilePic, timestamp, firstName, lastName, likes } }) => {
 
     const [comment, setComment] = useState("");
     const [postCommentList, setPostCommentList ] = useState([]);
     const [liked, setLiked] = useState(false);
 
-    const handleLike = () => {
-        
-        if(liked === false) {
+    const handleLike = async () => {
 
-            firestore.collection('posts').doc(id).get().then(doc => {
-                    const data = doc.data();
-                    console.log(data);
+        const postSnapshot = await firestore.collection('postLikes').doc(postId).get();
 
-                    const what = firestore.collection('posts').doc(id).where('userLikeIds', 'contains', '3etawegaweg').get().onSnapshot((snapshot) => console.log(snapshot));
-                    console.log(what);
-                    firestore.collection('posts').doc(id).update({
-                        userLikeIds: firebase.firestore.FieldValue.arrayUnion(currentUser.id)
-                    })
+            if(postSnapshot == null || !postSnapshot.exists) {
+                firestore.collection('postLikes').doc(postId).set({ [currentUser.id]: true })
+            } else {
+                firestore.collection('postLikes').doc(postId).get().then(doc => {
+                    const userLikeStatus = doc.data()[currentUser.id];
+                    if (userLikeStatus === undefined) {
+                        firestore.collection('postLikes').doc(postId).update({ [currentUser.id]: true })
+                        firestore.collection('posts').doc(postId).update({
+                            likes: likes + 1
+                        })
+                        firestore.collection('notifications').add({
+                            read: false,
+                            postId: postId,
+                            sender: currentUser.id,
+                            recipient: userId,
+                            type: "like",
+                            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                        })
+                    } else if (userLikeStatus === true) {
+                        firestore.collection('postLikes').doc(postId).update({ [currentUser.id]: false})
+                        firestore.collection('posts').doc(postId).update({
+                            likes: likes - 1
+                        })
+                    } else if (userLikeStatus === false) {
+                        firestore.collection('postLikes').doc(postId).update({ [currentUser.id]: true })
+                        firestore.collection('posts').doc(postId).update({
+                            likes: likes + 1
+                        })
+                    }
+    
 
-                    firestore.collection('posts').doc(id).update({
-                        likes: data.likes + 1
-                    })
-                    
-                }
-            )
-            setLiked(!liked)
+                    console.log(userLikeStatus)
+                });
+                
             }
-         else {
-
-            firestore.collection('posts').doc(id).update({
-                userLikeIds: firebase.firestore.FieldValue.arrayRemove(currentUser.id)
-            })
-
-            setLiked(!liked)
-
-        }
-
-        // if(liked === false) {
-        //     firestore.collection('posts').doc(id).get().then(doc => {
-        //         const docData = doc.data();
-
-                
-                
-        //         firestore.collection('posts').doc(id).collection('postLikes').doc(currentUser.id).get().then(doc2 => {
-        //             if (doc2.data()) {
-        //                 console.log(doc2.data())
-        //             } else {
-        //                 firestore.collection('posts').doc(id).collection('likes').doc(currentUser.id).set({
-        //                     likes: 1
-        //                 })
-
-        //                 firestore.collection('notifications').add({
-        //                     read: false,
-        //                     postId: id,
-        //                     sender: currentUser.id,
-        //                     recipient: userId,
-        //                     createdAt: firebase.firestore.FieldValue.serverTimestamp()
-        //                 })
-        //             }
-        //         })
-
-        //             firestore.collection('posts').doc(id).update({
-        //                 likes: docData.likes + 1
-        //             })
-
-        //     }
-        //     )
-        //     setLiked(!liked)
-        // } else if (liked === true) { 
-        //     firestore.collection('posts').doc(id).get().then(doc => {
-        //         const docData = doc.data()
-
-        //         firestore.collection('posts').doc(id).collection('postLikes').doc(currentUser.id).delete()
-
-        //         firestore.collection('posts').doc(id).update({
-        //             likes: docData.likes - 1
-        //         })
-
-        //     })
-        //     setLiked(!liked)
-        // }
 
 
     }
@@ -113,12 +76,12 @@ const Post = ({ id, currentUser, data: { userId, image, message, profilePic, tim
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        firestore.collection('posts').doc(id).collection('comments').add({
+        firestore.collection('posts').doc(postId).collection('comments').add({
             firstName: firstName,
             lastName: lastName,
             comment: comment,
             image: image,
-            id: id
+            postId: postId
         })
 
         setComment("")
@@ -126,7 +89,7 @@ const Post = ({ id, currentUser, data: { userId, image, message, profilePic, tim
     }
 
     useEffect(() => {
-        firestore.collection('posts').doc(id).collection('comments').onSnapshot((snapshot) => {
+        firestore.collection('posts').doc(postId).collection('comments').onSnapshot((snapshot) => {
             setPostCommentList(snapshot.docs.map((doc) => ({
                 id: doc.id,
                 data: doc.data()
@@ -136,7 +99,7 @@ const Post = ({ id, currentUser, data: { userId, image, message, profilePic, tim
     }, [postCommentList])
   
     return (
-        <div className="post" id={id}>
+        <div className="post" id={postId}>
             <div className="post__top">
                 <Avatar src={profilePic} className="post__avatar"/>
                 <div className="post__topDetails">

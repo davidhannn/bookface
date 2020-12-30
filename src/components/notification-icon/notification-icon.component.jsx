@@ -31,7 +31,7 @@ const NotificationIcon = ({ currentUser, fetchNotificationsStart, notifications 
         // console.log(notifications);
         // fetchNotificationsStart(currentUser.id)
        fetchNotificationsStart();
-       console.log(fetchNotificationsStart());
+       console.log(notifications);
     }, [fetchNotificationsStart])
 
     return (
@@ -41,10 +41,6 @@ const NotificationIcon = ({ currentUser, fetchNotificationsStart, notifications 
                         <NotificationsIcon />
                     </Badge>
                     </IconButton >
-                    {/* <NotificationDropdown number={numberOfNotifications} id={notifications.id} notifications={notifications}/> */}
-
-                {/* </IconButton> */}
-
         </div>
     )
 }

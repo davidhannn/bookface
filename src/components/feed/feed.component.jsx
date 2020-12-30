@@ -32,7 +32,7 @@ const Feed = ({ post, fetchPostStart }) => {
                 <div className="feed">
                     {
                         posts.map((post, id) => (
-                            <Post key={post.id} data={post.data} id={post.id}/>
+                            <Post key={post.id} data={post.data} postId={post.id}/>
                         ))
                     }
                 </div>
