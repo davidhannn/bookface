@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
+import { ReactComponent as BellIcon } from '../../icons/bell.svg';
+
 import NotificationsIcon from '@material-ui/icons/Notifications'
 import { IconButton } from '@material-ui/core';
 import Badge from '@material-ui/core/Badge';
@@ -11,37 +13,61 @@ import { fetchNotificationsStart } from '../../redux/user/user.actions'
 import { firestore } from '../../firebase/firebase.utils';
 import { selectCurrentUser, selectNotifications } from '../../redux/user/user.selectors';
 
-import NotificationDropdown from '../notification-dropdown/notification-dropdown.component'
+import './notification-icon.styles.scss'
+
+import NotificationDropdownItem from '../notification-dropdown-item/notification-dropdown-item.component'
 
 
 const NotificationIcon = ({ currentUser, fetchNotificationsStart, notifications }) => {
 
-    // const [notifications, setNotifications] = useState([]);
-    // const [numberOfNotifications, setNumberOfNotifications] = useState(0);
-
     useEffect(() => {
-        // firestore.collection('notifications').where('recipient', '==', currentUser.id).onSnapshot((snapshot) => {
-        //     setNotifications(snapshot.docs.map((doc) => ({
-        //         id: doc.id,
-        //         data: doc.data()
-        //     })))
-        // })
+        fetchNotificationsStart();
+     }, [fetchNotificationsStart])
+ 
 
-        // setNumberOfNotifications(notifications.length);
-        // console.log(notifications);
-        // fetchNotificationsStart(currentUser.id)
-       fetchNotificationsStart();
-       console.log(notifications);
-    }, [fetchNotificationsStart])
+     console.log(notifications)
 
+    const Notification = (props) => {
+
+        const [open, setOpen] = useState(false);
+        return (
+            <a href="#" className="icon-button" onClick={() => setOpen(!open)}>
+                <BellIcon />
+    
+                {open && props.children}
+    
+            </a>
+        )
+    }
+
+    const NotificationDropdown = () => {
+        const [read, setRead] = useState(false);
+
+        // const NotificationDropdownItem = (key, data) => {
+        //     console.log(data)
+        //     return (
+        //         <li>{data.recipient}</li>
+        //     )
+        // }
+    
+        return (
+            <div className='dropdown'>
+                <ul>
+                    {notifications && notifications.map((singleNotification, id) => {
+                        // const { recipient, postId } = singleNotification.data
+                        return (
+                            <NotificationDropdownItem id={singleNotification.id} NotificationInfo={singleNotification.data} />
+                        )
+                         })}
+                </ul>
+            </div>
+        )
+    }
+    
     return (
-        <div>
-                 <IconButton>
-                    <Badge badgeContent={4} color="error">
-                        <NotificationsIcon />
-                    </Badge>
-                    </IconButton >
-        </div>
+        <Notification>
+            <NotificationDropdown/>
+        </Notification>
     )
 }
 

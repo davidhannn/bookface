@@ -8,6 +8,6 @@ export const selectCurrentUser = createSelector(
 )
 
 export const selectNotifications = createSelector(
-    [selectCurrentUser],
-    currentUser => currentUser.notifications
+    [selectUser],
+    user => user.notifications
 )

@@ -1,0 +1,30 @@
+.notification-dropdown-item {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    background-color: white;
+    // transition: background $speed;
+    padding: 0.5rem;
+    color: black;
+
+    &:hover {
+        background-color: lightgray;
+    }
+}
+
+li {
+    display: flex;
+    flex-direction: row;
+    padding: 5px 5px;
+}
+
+// ul {
+//     list-style: none;
+//     margin: 0;
+//     padding: 0;
+// }
+
+// a {
+//     text-decoration: none;
+// }

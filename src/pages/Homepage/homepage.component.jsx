@@ -1,6 +1,7 @@
 import React, {  useEffect, useState, Fragment } from 'react'
 import { connect } from 'react-redux';
 import Header from '../../components/header/header.component';
+// import Navbar from '../../components/navbar/navbar.component'
 import CreatePost from '../../components/create-post/create-post.component';
 import Feed from '../../components/feed/feed.component'
 
@@ -14,6 +15,7 @@ const HomePage = () => {
     return (
         <Fragment>
             <Header />
+            {/* <Navbar /> */}
                 <div className="homepage__body">
                     <CreatePost />
                     <Feed />
