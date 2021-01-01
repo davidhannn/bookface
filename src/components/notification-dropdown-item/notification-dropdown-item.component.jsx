@@ -10,7 +10,7 @@ const NotificationDropdownItem = ({ NotificationInfo }) => {
 
     const [senderData, setSenderData] = useState({});
 
-    const { createdAt, postId, read, recipient, sender } = NotificationInfo;
+    const { createdAt, postId, read, recipient, sender, type } = NotificationInfo;
 
     useEffect(() => {
             firestore.collection('users').doc(sender).get().then(doc => 
@@ -20,13 +20,17 @@ const NotificationDropdownItem = ({ NotificationInfo }) => {
 
     const { firstName, lastName, profileImgUrl } = senderData
 
+    console.log(type)
+
     return (
         <li>
             <Avatar src={profileImgUrl} alt=""/>      
-            <div className="notification-dropdown-item">
-                <span>{firstName} {lastName}</span> 
-            </div>
+                <div className="notification-dropdown-item">
+                    <span style={{fontWeight: "bold"}}>{firstName} {lastName}</span> 
+                    {type == "like" ? <p>liked your post</p> : null}
+                </div> 
         </li>
+
     )
 }
 

@@ -30,6 +30,17 @@ const Post = ({ postId, currentUser, data: { userId, image, message, profilePic,
 
             if(postSnapshot == null || !postSnapshot.exists) {
                 firestore.collection('postLikes').doc(postId).set({ [currentUser.id]: true })
+                firestore.collection('posts').doc(postId).update({
+                    likes: likes + 1
+                })
+                firestore.collection('notifications').add({
+                    read: false,
+                    postId: postId,
+                    sender: currentUser.id,
+                    recipient: userId,
+                    type: "like",
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                })
             } else {
                 firestore.collection('postLikes').doc(postId).get().then(doc => {
                     const userLikeStatus = doc.data()[currentUser.id];
