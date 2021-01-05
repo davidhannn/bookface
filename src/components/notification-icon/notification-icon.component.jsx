@@ -31,12 +31,14 @@ const NotificationIcon = ({ currentUser, fetchNotificationsStart, notifications 
 
         const [open, setOpen] = useState(false);
         return (
-            <a href="#" className="icon-button" onClick={() => setOpen(!open)}>
-                <BellIcon />
-    
-                {open && props.children}
-    
-            </a>
+            <Badge badgeContent={1} color="error">
+                <a href="#" className="icon-button" onClick={() => setOpen(!open)}>
+                    <BellIcon />
+        
+                    {open && props.children}
+        
+                </a>
+            </Badge>
         )
     }
 

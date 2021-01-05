@@ -13,14 +13,15 @@ const AddFriendButton = ({ currentUser, receiverId }) => {
 
 
     const handleClick = () => {
-        firestore.collection('friendships').add({
-            id: currentUser.id
+        firestore.collection('friendships').doc(currentUser.id).set({
+            [receiverId]: false
          })
 
          firestore.collection('notifications').add({
-             senderId: currentUser.id,
-             recipientId: receiverId,
-             status: "pending"
+             sender: currentUser.id,
+             recipient: receiverId,
+             status: "pending",
+             type: "friendship"
          })
     }
 

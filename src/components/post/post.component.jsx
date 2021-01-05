@@ -90,9 +90,19 @@ const Post = ({ postId, currentUser, data: { userId, image, message, profilePic,
         firestore.collection('posts').doc(postId).collection('comments').add({
             firstName: firstName,
             lastName: lastName,
+            userId: currentUser.id,
             comment: comment,
             image: image,
             postId: postId
+        })
+
+        firestore.collection('notifications').add({
+            read: false,
+            postId: postId,
+            sender: currentUser.id,
+            recipient: userId,
+            type: "comment",
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
         })
 
         setComment("")
