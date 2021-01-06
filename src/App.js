@@ -9,6 +9,7 @@ import LoginPage from './pages/AuthPages/LoginPage';
 import RegisterPage from './pages/AuthPages/RegisterPage';
 import HomePage from './pages/HomePage/homepage.component';
 import UserPage from './pages/UserPage/userpage.component';
+import FriendPage from './pages/FriendPage/friendpage.component';
 import SearchPage from './pages/SearchPage/searchpage.component';
 
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
@@ -20,7 +21,7 @@ import { CheckCircleOutline } from '@material-ui/icons';
 const App = ({ checkUserSession, currentUser }) => {
 
   useEffect(() => {
-    checkUserSession()
+    checkUserSession();
   }, [])
  
   return (
@@ -29,7 +30,8 @@ const App = ({ checkUserSession, currentUser }) => {
         <Route exact path="/" render={() => currentUser ? (<HomePage />) : (<Redirect to="/login" />) }  />
         <Route path='/login' render={() => currentUser ? (<Redirect to="/" />) : (<LoginPage />)} />
         <Route path='/register' component={RegisterPage} />
-        <Route path='/user/:userId' component={UserPage} />
+        {/* <Route exact path='/user/:userId' render={({match}) => currentUser.id === match ? (<UserPage match={match}/>) : (<FriendPage match={match}/>)}/> */}
+        <Route path='/user/:userId' component={FriendPage} />
         <Route path='/search/:text' component={SearchPage} />
       </Switch>
     </div>

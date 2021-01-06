@@ -45,6 +45,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 export const getCurrentUser = () => {
     return new Promise((resolve, reject) => {
         const unsubscribe = auth.onAuthStateChanged(userAuth => {
+            userAuth ? localStorage.setItem('userAuth', JSON.stringify(userAuth)) : localStorage.removeItem('userAuth');
             unsubscribe();
             resolve(userAuth);     
         }, reject)

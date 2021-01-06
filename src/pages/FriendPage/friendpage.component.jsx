@@ -14,11 +14,12 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import Post from '../../components/post/post.component';
 import CustomFacebookButton from '../../components/custom-facebook-button/custom-facebook-button'
 import AddFriendButton from '../../components/add-friend-button/add-friend-button';
+import { ReactComponent as MessengerIcon } from '../../icons/messenger.svg'
 
-import './userpage.styles.scss';
+import './friendpage.styles.scss';
 import { firestore } from '../../firebase/firebase.utils';
 
-const UserPage = ({ match, currentUser }) => {
+const FriendPage = ({ match, currentUser }) => {
     const [user, setUser] = useState({})
     const [loading, setLoading] = useState(true)
     const [userPosts, setUserPosts] = useState([]);
@@ -54,6 +55,8 @@ const UserPage = ({ match, currentUser }) => {
             }) 
             )
         )
+
+
     }) }, [])
 
     return (
@@ -78,10 +81,10 @@ const UserPage = ({ match, currentUser }) => {
                         ))}
                         </div>
 
-                        {/* <div className="userpage__headerBottomButtonsRight">
+                        <div className="userpage__headerBottomButtonsRight">
                             <AddFriendButton receiverId={match.params.userId} />
-                            <button>Message</button>
-                        </div> */}
+                            <MessengerIcon />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -104,4 +107,4 @@ const mapStateToProps = createStructuredSelector({
 
 
 
-export default connect(mapStateToProps)(UserPage)
+export default connect(mapStateToProps)(FriendPage)

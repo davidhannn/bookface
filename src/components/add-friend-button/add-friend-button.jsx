@@ -28,7 +28,7 @@ const AddFriendButton = ({ currentUser, receiverId }) => {
     return (
         <button onClick={handleClick} className="add-friend-button">
             <PersonAddIcon />
-            <p>Add Friend</p>
+            <span>Add Friend</span>
         </button>
     )
 }

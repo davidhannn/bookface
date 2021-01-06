@@ -1,0 +1,83 @@
+.userpage__header {
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(180deg, #a7bef0, #FFFFFF);
+    padding: 30px 30px;
+}
+
+.userpage__headerName {
+    margin-top: 30px;
+    font-weight: bold;
+}
+
+.userpage__headerProfile {
+    margin-top: 20px;
+    position: relative;
+}
+
+.userpage__headerProfileCameraIcon {
+    position: absolute;
+    bottom: 1px;
+    right: 1px;
+}
+
+.userpage__headerBottom {
+    width: 100%;
+    margin-top: 50px;
+}
+
+.userpage__headerBottomButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .userpage__headerBottomButtonsLeft {
+        display: flex;
+    }
+
+    .userpage__headerBottomButtonsRight {
+        display: flex;
+    }
+}
+
+
+
+.userpage__feed {
+    margin: 0 auto;
+    width: 60%;
+}
+
+.box {
+    display: flex;
+    align-items: center;
+    padding: 10px 12px;
+    margin: 6px 0px;
+    border-style: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: 0px;
+    background-color: transparent;
+    cursor: pointer;
+    height: 50px;
+
+    &.active {
+        color: #3578E5;
+        border-bottom: 2px solid #2e81f4;
+        outline: none;
+    }
+
+
+}
+
+button {
+    outline: none;
+}
+
+svg {
+    fill: #2e81f4;
+    width: 35px;
+    height: 35px;
+}
