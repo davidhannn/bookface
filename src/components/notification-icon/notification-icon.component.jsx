@@ -45,13 +45,6 @@ const NotificationIcon = ({ currentUser, fetchNotificationsStart, notifications 
     const NotificationDropdown = () => {
         const [read, setRead] = useState(false);
 
-        // const NotificationDropdownItem = (key, data) => {
-        //     console.log(data)
-        //     return (
-        //         <li>{data.recipient}</li>
-        //     )
-        // }
-    
         return (
             <div className='dropdown'>
                 <ul>

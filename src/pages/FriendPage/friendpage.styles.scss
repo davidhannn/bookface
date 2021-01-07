@@ -81,3 +81,17 @@ svg {
     width: 35px;
     height: 35px;
 }
+
+.request {
+    display: flex;
+    flex-direction: row;
+    padding: 2px 8px;
+    height: 35px;
+    margin-right: 5px;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    justify-content: center;
+    align-items: center;
+    background-color: #2e81f4;
+}

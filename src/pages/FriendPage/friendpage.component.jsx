@@ -15,6 +15,7 @@ import Post from '../../components/post/post.component';
 import CustomFacebookButton from '../../components/custom-facebook-button/custom-facebook-button'
 import AddFriendButton from '../../components/add-friend-button/add-friend-button';
 import { ReactComponent as MessengerIcon } from '../../icons/messenger.svg'
+import { ReactComponent as FriendIcon } from '../../icons/friends.svg'
 
 import './friendpage.styles.scss';
 import { firestore } from '../../firebase/firebase.utils';
@@ -23,6 +24,7 @@ const FriendPage = ({ match, currentUser }) => {
     const [user, setUser] = useState({})
     const [loading, setLoading] = useState(true)
     const [userPosts, setUserPosts] = useState([]);
+    const [friendshipStatus, setFriendshipStatus] = useState("");
     const [activeButton, setActiveButton] = useState({
         activeObject: null,
         objects: [{ id : "Posts" }, { id: "About" }, { id: "Friends" }, { id: "Photos" }]
@@ -56,9 +58,22 @@ const FriendPage = ({ match, currentUser }) => {
             )
         )
 
+        firestore.collection('friendships').doc(currentUser.id).get().then(doc => {
+            const friendshipStatus = doc.data();
+           
+
+            if (friendshipStatus[match.params.userId] === undefined) {
+                setFriendshipStatus("sendFriendRequest")
+            } else if (friendshipStatus[match.params.userId] === true) {
+                setFriendshipStatus("friends")
+            } else {
+                setFriendshipStatus("friendRequestSent")
+            }
+        })
 
     }) }, [])
 
+    console.log(friendshipStatus)
     return (
         <Fragment>
             <Header />
@@ -82,7 +97,11 @@ const FriendPage = ({ match, currentUser }) => {
                         </div>
 
                         <div className="userpage__headerBottomButtonsRight">
-                            <AddFriendButton receiverId={match.params.userId} />
+                            { friendshipStatus === "sendFriendRequest" ? <AddFriendButton receiverId={match.params.userId} /> :
+                              friendshipStatus === "friends" ? <FriendIcon /> : 
+                              friendshipStatus === "friendRequestSent" ? <span className="request">Request Sent</span> : 
+                              null}
+                            {/* <AddFriendButton receiverId={match.params.userId} /> */}
                             <MessengerIcon />
                         </div>
                     </div>
