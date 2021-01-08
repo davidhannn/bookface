@@ -31,8 +31,13 @@ const App = ({ checkUserSession, currentUser }) => {
         <Route exact path="/" render={() => currentUser ? (<HomePage />) : (<Redirect to="/login" />) }  />
         <Route path='/login' render={() => currentUser ? (<Redirect to="/" />) : (<LoginPage />)} />
         <Route path='/register' component={RegisterPage} />
-        {/* <Route exact path='/user/:userId' render={({match}) => currentUser.id === match ? (<UserPage match={match}/>) : (<FriendPage match={match}/>)}/> */}
-        <Route path='/user/:userId' component={FriendPage} />
+        <Route exact path='/user/:userId' render={({match}) => {
+          console.log(match.params.userId)
+          const userId = match.params.userId;
+          return (  currentUser.id === userId ? (<UserPage match={match}/>) : (<FriendPage match={match}/>) )
+            }
+          }/>
+        {/* <Route path='/user/:userId' component={FriendPage} /> */}
         <Route path='/search/:text' component={SearchPage} />
         <Route path='/post/:postId' component={PostPage} />
       </Switch>

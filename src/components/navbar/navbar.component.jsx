@@ -1,4 +1,9 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+
+import { Link } from 'react-router-dom'
+import Avatar from '../avatar/avatar.component'
 import './navbar.styles.scss';
 import { ReactComponent as BellIcon } from '../../icons/bell.svg';
 import { ReactComponent as MessengerIcon } from '../../icons/messenger.svg';
@@ -8,6 +13,8 @@ import { ReactComponent as CogIcon } from '../../icons/cog.svg';
 import { ReactComponent as ChevronIcon } from '../../icons/chevron.svg';
 import { ReactComponent as ArrowIcon } from '../../icons/arrow.svg';
 import { ReactComponent as BoltIcon } from '../../icons/bolt.svg';
+
+import { selectCurrentUser } from '../../redux/user/user.selectors';
 
 import { CSSTransition } from 'react-transition-group';
 
@@ -44,7 +51,6 @@ const DropDownMenu = () => {
         return (
             <a href="#" className="menu-item">
                 <span className="icon-button">{props.leftIcon}</span>
-
                 {props.children} 
 
                 <span className="icon-right">{props.rightIcon}</span>
@@ -57,12 +63,15 @@ const DropDownMenu = () => {
             <CSSTransition in={activeMenu === 'main'} unmountOnExit timeout={500} className="menu-primary">
 
                 <div className="menu">
-                    <DropdownItem>My Profile</DropdownItem>
-                        <DropdownItem
+                    <DropdownItem> 
+                            My Profile
+                    </DropdownItem>
+                    {/* <DropdownItem
                             leftIcon={<CogIcon />}
                             rightIcon={<ChevronIcon />}
                         >
-                    </DropdownItem>
+                    </DropdownItem> */}
+                    <DropdownItem>Sign Out</DropdownItem>
                 </div>
 
             </CSSTransition>
@@ -85,4 +94,8 @@ const Navbar = (props) => {
     )
 }
 
-export default Navbar
+const mapStateToProps = createStructuredSelector({
+    currentUser: selectCurrentUser
+})
+
+export default connect(mapStateToProps)(Navbar)
