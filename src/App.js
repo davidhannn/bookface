@@ -11,6 +11,7 @@ import HomePage from './pages/HomePage/homepage.component';
 import UserPage from './pages/UserPage/userpage.component';
 import FriendPage from './pages/FriendPage/friendpage.component';
 import SearchPage from './pages/SearchPage/searchpage.component';
+import PostPage from './pages/PostPage/postpage.component';
 
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
@@ -33,6 +34,7 @@ const App = ({ checkUserSession, currentUser }) => {
         {/* <Route exact path='/user/:userId' render={({match}) => currentUser.id === match ? (<UserPage match={match}/>) : (<FriendPage match={match}/>)}/> */}
         <Route path='/user/:userId' component={FriendPage} />
         <Route path='/search/:text' component={SearchPage} />
+        <Route path='/post/:postId' component={PostPage} />
       </Switch>
     </div>
   );

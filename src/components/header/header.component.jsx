@@ -19,6 +19,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications'
 
 import Search from '../search/search.component';
 import NotificationIcon from '../notification-icon/notification-icon.component';
+import Navbar from '../navbar/navbar.component.jsx'
 
 import DropdownButton from '../dropdown-button/dropdown-button.component';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -42,7 +43,7 @@ const Header = ({ currentUser }) => (
                 <div className="header__icon header__icon--active">
                     <HomeIcon fontSize="large"/>
                 </div>
-                <div className="header__icon">
+                {/* <div className="header__icon">
                     <VideoLabelIcon fontSize="large"/>
                 </div>
                 <div className="header__icon">
@@ -53,36 +54,30 @@ const Header = ({ currentUser }) => (
                 </div>
                 <div className="header__icon">
                     <SportsEsportsIcon fontSize="large"/>
-                </div>
+                </div> */}
             </div>
 
             <div className="header__right">
                 <Link to={`/user/${currentUser.id}`} >
                 <div className="header__user_info">
                     <Avatar src={currentUser.profileImgUrl} />
-                    <h4>{currentUser.firstName} {currentUser.lastName}</h4>
+                    <h5>{currentUser.firstName}</h5>
                 </div>
                 </Link>
 
-                <IconButton>
+                {/* <IconButton>
                     <AddIcon />
                 </IconButton>
 
                 <IconButton>
                     <MessageIcon />
-                </IconButton>
+                </IconButton> */}
                 
                 <NotificationIcon userId={currentUser.id} />
 
-                {/* {
-                    currentUser ? ( <IconButton>
-                        <ExpandMoreIcon onClick={() => auth.signOut()} />
-                    </IconButton>) : ( <Redirect to="/login" />)
-                } */}
+                {/* <DropdownButton currentUser={currentUser} />  */}
+                <Navbar />
 
-                {/* <IconButton> */}
-                    <DropdownButton currentUser={currentUser} />
-                {/* </IconButton> */}
             </div>
         </div>
  

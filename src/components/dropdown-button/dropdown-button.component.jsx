@@ -13,7 +13,7 @@ import { Avatar } from '@material-ui/core';
 
 import { auth } from '../../firebase/firebase.utils';
 
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { ReactComponent as CaretIcon } from '../../icons/caret.svg';
 
 import { signOutStart } from '../../redux/user/user.actions';
 
@@ -63,22 +63,15 @@ const MenuListComposition = ({ signOutStart, currentUser: { id, firstName, lastN
   }, [open]);
 
   return (
-    // <div className={classes.root}>
-    //   <Paper className={classes.paper}>
-    //     <MenuList>
-    //       <MenuItem>Profile</MenuItem>
-    //       <MenuItem>My account</MenuItem>
-    //       <MenuItem>Logout</MenuItem>
-    //     </MenuList>
-    //   </Paper>
       <div>
         <Button
           ref={anchorRef}
           aria-controls={open ? 'menu-list-grow' : undefined}
           aria-haspopup="true"
           onClick={handleToggle}
+          className="caret-button"
         >
-          <ExpandMoreIcon />
+          <CaretIcon />
         </Button>
         <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
           {({ TransitionProps, placement }) => (

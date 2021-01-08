@@ -39,14 +39,14 @@
     align-items: center;
     padding: 0 35px;
 
-    .MuiSvgIcon-root {
-      color: gray;
+    // .MuiSvgIcon-root {
+    //   color: gray;
 
-      &:hover {
-        color: #2e81f4;
-        cursor: pointer;
-      }
-    }
+    //   &:hover {
+    //     color: #2e81f4;
+    //     cursor: pointer;
+    //   }
+    // }
 
     &.header__icon--active {
       border-bottom: 4px solid #2e81f4;
@@ -61,15 +61,21 @@
 .header__right {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: center;
 
   .header__user_info {
     display: flex;
     flex-direction: row;
-    padding-top: 10px;
-    h4 {
+    margin-right: 15px;
+    h5 {
       font-size: medium;
       padding-top: 10px;
       padding-left: 10px;
+      text-decoration: none;
+      &:hover {
+        text-decoration: none;
+      }
     }
   }
 }

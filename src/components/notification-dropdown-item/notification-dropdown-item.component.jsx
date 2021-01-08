@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-
+import { Link } from 'react-router-dom'
 import { firestore } from '../../firebase/firebase.utils'
 import notificationIconComponent from '../notification-icon/notification-icon.component';
 import { Avatar } from '@material-ui/core';
@@ -56,18 +56,20 @@ const NotificationDropdownItem = ({ NotificationInfo }) => {
     }
 
     return (
+        <Link to={`post/${postId}`} style={{ textDecoration: 'none'}}>
         <li>
             <Avatar src={profileImgUrl} alt="" />      
                 <div className="notification-dropdown-item">
-                    <p><span style={{fontWeight: "bold"}}>{firstName} {lastName} </span>
-                    {type == "like" ? "liked your post" : 
-                    type == "comment" ? "comment on your post" : 
-                    (type == "friendship" && status == "pending") ? confirmOrDelete()
-                    : null}
-                    </p> 
+                    <p>
+                        <span style={{fontWeight: "bold"}}>{firstName} {lastName} </span>
+                            {type == "like" ? "liked your post" : 
+                            type == "comment" ? "comment on your post" : 
+                            (type == "friendship" && status == "pending") ? confirmOrDelete()
+                            : null}
+                    </p>
                 </div> 
         </li>
-
+        </Link>
     )
 }
 

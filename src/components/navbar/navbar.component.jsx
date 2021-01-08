@@ -16,25 +16,25 @@ const NavItem = (props) => {
     const [open, setOpen] = useState(false);
 
     return (
-        <li className="nav-item">
+        <div className="nav-item">
             <a href="#" className="icon-button" onClick={() => setOpen(!open)}>
                 {props.icon}
             </a>
 
             {open && props.children}
-        </li>
+        </div>
     )
 }
 
-const NavbarWrapper = (props) => {
-    return (
-        <nav className="navbar">
-            <ul className="navbar-nav">
-                { props.children }
-            </ul> 
-        </nav>
-    )
-}
+// const NavbarWrapper = (props) => {
+//     return (
+//         <nav className="navbar">
+//             <ul className="navbar-nav">
+//                 { props.children }
+//             </ul> 
+//         </nav>
+//     )
+// }
 
 const DropDownMenu = () => {
 
@@ -72,17 +72,16 @@ const DropDownMenu = () => {
 
 const Navbar = (props) => {
     return (
-        <NavbarWrapper>
-            <NavItem icon={<PlusIcon />} />
-            <NavItem icon={<BellIcon />} />
-            <NavItem icon={<MessengerIcon />} />
+        // <NavbarWrapper>
+        //     <NavItem icon={<PlusIcon />} />
+        //     <NavItem icon={<BellIcon />} />
+        //     <NavItem icon={<MessengerIcon />} />
 
             <NavItem icon={<CaretIcon />}>
-            
-                {/* Dropdown goes here */}
                 <DropDownMenu />
-            </NavItem>
-        </NavbarWrapper>
+            </NavItem >
+
+        // </NavbarWrapper> 
     )
 }
 

@@ -31,14 +31,13 @@ const NotificationIcon = ({ currentUser, fetchNotificationsStart, notifications 
 
         const [open, setOpen] = useState(false);
         return (
-            <Badge badgeContent={1} color="error">
                 <a href="#" className="icon-button" onClick={() => setOpen(!open)}>
                     <BellIcon />
         
                     {open && props.children}
         
                 </a>
-            </Badge>
+   
         )
     }
 
@@ -46,7 +45,8 @@ const NotificationIcon = ({ currentUser, fetchNotificationsStart, notifications 
         const [read, setRead] = useState(false);
 
         return (
-            <div className='dropdown'>
+            <div className='notification-dropdown'>
+                <div className="notification-title">Notifications</div>
                 <ul>
                     {notifications && notifications.map((singleNotification, id) => {
                         // const { recipient, postId } = singleNotification.data
