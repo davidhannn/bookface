@@ -15,6 +15,9 @@ import Post from '../../components/post/post.component';
 import CustomFacebookButton from '../../components/custom-facebook-button/custom-facebook-button'
 import AddFriendButton from '../../components/add-friend-button/add-friend-button';
 
+import CreatePost from '../../components/create-post/create-post.component'
+import Friends from '../../components/friends/friends.component'
+
 import './userpage.styles.scss';
 import { firestore } from '../../firebase/firebase.utils';
 
@@ -86,14 +89,23 @@ const UserPage = ({ match, currentUser }) => {
                 </div>
             </div>
 
-
-            <div className="userpage__feed">
+                
+                <div className="userpage__body">
+                    <div className="userpage__body--left">
+                        <Friends userId={currentUser.id} />
+                    </div>
+                    <div className="userpage__body--right">
+                        <CreatePost />
+                        <div className="userpage__feed">
                  {
                         userPosts.map((post, id) => (
                             <Post id={post.id} data={post.data} />
                         ))
                     }
-            </div>
+                </div>
+                    </div>
+                </div>
+ 
         </Fragment>
     )
 }

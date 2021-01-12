@@ -60,6 +60,12 @@ export const convertCollectionsSnapshotToMap = (collections) => {
     return transformedCollection
 }
 
+export const getUsers = async ({ userIds }) => {
+    const refs = userIds.map((id) => firestore.doc(`users/${id}`))
+    const users = await firestore.getAll(...refs)
+    console.log(users.map(doc => doc.data()))
+}
+
 // export const getUserData = async (userId) => {
 
 //     try {

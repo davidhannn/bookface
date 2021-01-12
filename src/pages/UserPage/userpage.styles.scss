@@ -40,9 +40,24 @@
     }
 }
 
-.userpage__feed {
+.userpage__body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     margin: 0 auto;
-    width: 60%;
+    width: 85%;
+}
+.userpage__body--left {
+    width: 30%;
+}
+
+.userpage__body--right {
+    width: 65%;
+}
+
+.userpage__feed {
+    // margin: 0 auto;
+    width: 100% !important;
 }
 
 .box {
@@ -70,3 +85,4 @@
 button {
     outline: none;
 }
+

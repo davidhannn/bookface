@@ -46,7 +46,7 @@ const NotificationDropdownItem = ({ NotificationInfo }) => {
 
         return (
             <div className="friend-request">
-                <p>sent you a friend request</p>
+                <span>sent you a friend request</span>
                 <div className="button-row">
                     <button className="confirm-button" onClick={handleClick} value="confirm">Confirm</button>
                     <button className="delete-button" value="delete">Delete</button>

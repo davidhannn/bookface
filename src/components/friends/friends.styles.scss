@@ -1,0 +1,23 @@
+.friends-container {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    grid-template-rows: repeat(3, auto);
+    margin-top: 20px;
+    padding: 10px 10px;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0px 5px 7px -7px rgba(0, 0, 0, 0.75);
+    width: 100%;
+}
+
+.friend-container-single {
+    display: flex;
+    flex-direction: column;
+}
+
+.friend-container-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+}
