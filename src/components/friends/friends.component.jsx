@@ -25,34 +25,15 @@ const Friends = ({ userId }) => {
                 })
                     ))
             })
-            // firestore.getAll(...refs).then(snapshot => {
-            //     snapshot.forEach(snapshot => {
-            //         console.log(snapshot.data())
-            //     })
-            // })
-            // const friendSnapshot = friendRefs.get().then((friend) => console.log(friend.data()))
-
-            // getUsers(friendIds)
-            // friendIds.forEach(id => firestore.doc(`users/${id}`).get().then(friendData => {
-            //     setFriendsList(friendData.data(), friendData.id)
-            // }))
-            // const refs = friendIds.map(id => firestore.doc(`users/${id}`)).get().then(data => console.log(doc.data()))
-            // firestore.getAll(...refs).then(user => console.log(user.map(doc => doc.data())))
-            // console.log(refs)
-            // await firestore.getAll(...refs).then(user => console.log(user.map(doc => doc.data())))
-            // const friendData = friendIds.map((friend) => {
-            //     firestore.collection('users').doc(friend).get().then(doc => {
-            //         const friendData = doc.data();
-            //     })
-            // })
-            // const test = friendIds.map((friend) => firestore.collection('users').doc(friend).get().then((doc) => setFriendsList(doc.data())))
         })
+
     }, [])
 
     return (
         <Fragment>
-            
-            <div className="friends-container">
+            <div className="friends__container">
+                <h6>Friends</h6>
+                <div className="friends__container-grid">
                 {friendsList.map((friend) => {
                     const { friendData : { firstName, lastName, profileImgUrl }, friendId } = friend
                     return (
@@ -66,6 +47,7 @@ const Friends = ({ userId }) => {
                     )
                 })}
         </div>
+            </div>
         </Fragment>
     )
 }

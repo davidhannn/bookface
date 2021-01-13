@@ -28,7 +28,7 @@ const Post = ({ postId, currentUser, data: { userId, image, message, profilePic,
 
         const postSnapshot = await firestore.collection('postLikes').doc(postId).get();
 
-            if(postSnapshot == null || !postSnapshot.exists) {
+            if(postSnapshot == undefined || !postSnapshot.exists) {
                 firestore.collection('postLikes').doc(postId).set({ [currentUser.id]: true })
                 firestore.collection('posts').doc(postId).update({
                     likes: likes + 1
@@ -68,9 +68,6 @@ const Post = ({ postId, currentUser, data: { userId, image, message, profilePic,
                             likes: likes + 1
                         })
                     }
-    
-
-                    console.log(userLikeStatus)
                 });
                 
             }
@@ -140,7 +137,7 @@ const Post = ({ postId, currentUser, data: { userId, image, message, profilePic,
             </div>
 
             <div className="post__like">
-                <p>{likes} Likes</p>
+                <span>{likes} Likes</span>
             </div>
 
             <div className="post__buttons">

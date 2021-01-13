@@ -24,7 +24,6 @@ const Feed = ({ post, fetchPostStart }) => {
                 })
             ))
         })
-        // fetchPostStart()
     }, [])
 
 

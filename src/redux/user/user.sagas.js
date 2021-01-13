@@ -72,7 +72,6 @@ export function* fetchNotifications() {
         const notificationsRef = yield firestore.collection('notifications').where('recipient', '==', user.id).limit(6)
         const snapshot = yield notificationsRef.get();
         const notifications = yield call(convertCollectionsSnapshotToMap, snapshot)
-        console.log(notifications)
         yield put(fetchNotificationsSuccess(notifications))
     } catch(error) {
         yield put(fetchNotificationsFailure(error))

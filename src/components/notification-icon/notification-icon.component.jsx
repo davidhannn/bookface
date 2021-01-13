@@ -5,12 +5,11 @@ import { createStructuredSelector } from 'reselect'
 import { ReactComponent as BellIcon } from '../../icons/bell.svg';
 
 import NotificationsIcon from '@material-ui/icons/Notifications'
-import { IconButton } from '@material-ui/core';
-import Badge from '@material-ui/core/Badge';
+// import { IconButton } from '@material-ui/core';
+// import Badge from '@material-ui/core/Badge';
 
 import { fetchNotificationsStart } from '../../redux/user/user.actions'
 
-import { firestore } from '../../firebase/firebase.utils';
 import { selectCurrentUser, selectNotifications } from '../../redux/user/user.selectors';
 
 import './notification-icon.styles.scss'
@@ -24,8 +23,6 @@ const NotificationIcon = ({ currentUser, fetchNotificationsStart, notifications 
         fetchNotificationsStart();
      }, [fetchNotificationsStart])
  
-
-     console.log(notifications)
 
     const Notification = (props) => {
 

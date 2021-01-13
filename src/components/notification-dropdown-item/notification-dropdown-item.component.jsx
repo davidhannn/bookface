@@ -60,13 +60,11 @@ const NotificationDropdownItem = ({ NotificationInfo }) => {
         <li>
             <Avatar src={profileImgUrl} alt="" />      
                 <div className="notification-dropdown-item">
-                    <p>
                         <span style={{fontWeight: "bold"}}>{firstName} {lastName} </span>
-                            {type == "like" ? "liked your post" : 
-                            type == "comment" ? "comment on your post" : 
+                            {type == "like" ? " liked your post" : 
+                            type == "comment" ? " comment on your post" : 
                             (type == "friendship" && status == "pending") ? confirmOrDelete()
                             : null}
-                    </p>
                 </div> 
         </li>
         </Link>
