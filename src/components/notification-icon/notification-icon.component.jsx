@@ -46,7 +46,6 @@ const NotificationIcon = ({ currentUser, fetchNotificationsStart, notifications 
                 <div className="notification-title">Notifications</div>
                 <ul>
                     {notifications && notifications.map((singleNotification, id) => {
-                        // const { recipient, postId } = singleNotification.data
                         return (
                             <NotificationDropdownItem id={singleNotification.id} NotificationInfo={singleNotification.data} />
                         )

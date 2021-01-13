@@ -24,9 +24,9 @@ const Post = ({ postId, currentUser, data: { userId, image, message, profilePic,
     const [postCommentList, setPostCommentList ] = useState([]);
     const [liked, setLiked] = useState(false);
 
-    const handleLike = async () => {
+    const handleLike = () => {
 
-        const postSnapshot = await firestore.collection('postLikes').doc(postId).get();
+        const postSnapshot = firestore.collection('postLikes').doc(postId).get();
 
             if(postSnapshot == undefined || !postSnapshot.exists) {
                 firestore.collection('postLikes').doc(postId).set({ [currentUser.id]: true })

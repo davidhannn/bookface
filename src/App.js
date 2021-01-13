@@ -32,7 +32,6 @@ const App = ({ checkUserSession, currentUser }) => {
         <Route path='/login' render={() => currentUser ? (<Redirect to="/" />) : (<LoginPage />)} />
         <Route path='/register' component={RegisterPage} />
         <Route exact path='/user/:userId' render={({match}) => {
-          console.log(match.params.userId)
           const userId = match.params.userId;
           return (  currentUser.id === userId ? (<UserPage match={match}/>) : (<FriendPage match={match}/>) )
             }
