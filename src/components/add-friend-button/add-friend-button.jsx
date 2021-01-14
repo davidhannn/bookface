@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import { connect } from 'react-redux';
 
@@ -12,6 +12,12 @@ import { createStructuredSelector } from 'reselect';
 const AddFriendButton = ({ currentUser, receiverId }) => {
 
 
+    const [requestStatus, setRequestStatus] = useState(false);
+
+    useEffect(() => {
+
+    }, [requestStatus])
+
     const handleClick = () => {
         firestore.collection('friendships').doc(currentUser.id).set({
             [receiverId]: false
@@ -23,12 +29,14 @@ const AddFriendButton = ({ currentUser, receiverId }) => {
              status: "pending",
              type: "friendship"
          })
+
+         setRequestStatus(true);
     }
 
     return (
         <button onClick={handleClick} className="add-friend-button">
             <PersonAddIcon />
-            <span>Add Friend</span>
+            { requestStatus === false ? <span>Add Friend</span> : <span>Request Sent</span>}
         </button>
     )
 }

@@ -78,7 +78,7 @@ const FriendPage = ({ match, currentUser }) => {
             }
         })
 
-    }) }, [friendshipStatus])
+    }) }, [])
 
     return (
         <Fragment>
