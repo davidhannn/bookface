@@ -160,6 +160,15 @@ const Post = ({ postId, currentUser, data: { userId, image, message, profilePic,
             })))
         })
 
+        firestore.collection('postLikes').doc(postId).get().then((doc) => {
+                const userLikeState = doc.data()[currentUser.id]
+                if (userLikeState === true) {
+                    setLikeStatus("liked")
+                } else {
+                    setLikeStatus("notLiked")
+                }
+        })
+
     }, [postCommentList, likeStatus])
   
     return (
