@@ -85,11 +85,10 @@ const Post = ({ postId, currentUser, data: { userId, image, message, profilePic,
         e.preventDefault();
 
         firestore.collection('posts').doc(postId).collection('comments').add({
-            firstName: firstName,
-            lastName: lastName,
+            firstName: currentUser.firstName,
+            lastName: currentUser.lastName,
             userId: currentUser.id,
             comment: comment,
-            image: image,
             postId: postId
         })
 
@@ -163,7 +162,7 @@ const Post = ({ postId, currentUser, data: { userId, image, message, profilePic,
                 ))
             }
             <div className="post__comment">
-                <Avatar src={profilePic} className="post__commentAvatar"/>
+                <Avatar src={currentUser.profileImgUrl} className="post__commentAvatar"/>
                 <form>
                     <input type="text" placeholder="Write a comment..." onChange={handleChange}/>
                     <button type="submit" onClick={handleSubmit}>Hidden Button</button>

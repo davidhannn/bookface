@@ -14,6 +14,7 @@ const Friends = ({ userId }) => {
 
         firestore.collection('friendships').doc(userId).get().then(doc =>{
             const friends = doc.data();
+            if (friends === undefined) return
             const friendIds = Object.keys(friends).filter(key => friends[key] === true);
 
             const refs = friendIds.map(id => firestore.collection('users').doc(id).get()) 
