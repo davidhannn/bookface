@@ -12,18 +12,31 @@ import { selectAllPosts, selectAllPostsFetching } from '../../redux/post/post.se
 import { fetchPostStart } from '../../redux/post/post.actions';
 
 
-const Feed = ({ post, fetchPostStart }) => {
+const Feed = ({ post, userId, fetchPostStart }) => {
 
     const [posts, setPosts] = useState([]);
+
     useEffect(() => {
-        firestore.collection('posts').orderBy("timestamp", "desc").limit(15).onSnapshot((snapshot) => {
-            setPosts(snapshot.docs.map((doc) => 
-                ({
-                    id: doc.id,
-                    data: doc.data()
-                })
-            ))
-        })
+        // Conditional to determine whether to post Home Page Feed or the User/Friends Post Feed
+        if(!userId) {
+            firestore.collection('posts').orderBy("timestamp", "desc").limit(15).onSnapshot((snapshot) => {
+                setPosts(snapshot.docs.map((doc) => 
+                    ({
+                        id: doc.id,
+                        data: doc.data()
+                    })
+                ))
+            })
+        } else {
+            firestore.collection('posts').where("userId", "==", userId).onSnapshot((snapshot) => {
+                setPosts(snapshot.docs.map((doc) => 
+                    ({
+                        id: doc.id,
+                        data: doc.data()
+                    })
+                ))
+            })
+        }
     }, [])
 
 

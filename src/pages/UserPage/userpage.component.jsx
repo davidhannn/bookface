@@ -4,7 +4,7 @@ import { createStructuredSelector } from 'reselect';
 import ImageUpload from '../../components/image-upload/image-upload.component';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 import Header from '../../components/header/header.component'
-
+import Feed from '../../components/feed/feed.component'
 
 import { IconButton, Avatar } from '@material-ui/core';
 import CameraModel from '../../components/modal/modal.component';
@@ -23,7 +23,6 @@ import { firestore } from '../../firebase/firebase.utils';
 
 const UserPage = ({ match, currentUser }) => {
     const [user, setUser] = useState({})
-    const [userPosts, setUserPosts] = useState([]);
     const [activeButton, setActiveButton] = useState({
         activeObject: null,
         objects: [{ id : "Posts" }, { id: "About" }, { id: "Friends" }, { id: "Photos" }]
@@ -49,14 +48,7 @@ const UserPage = ({ match, currentUser }) => {
             setUser(doc.data());
         })
 
-        firestore.collection('posts').where("userId", "==", match.params.userId).onSnapshot((snapshot) => {
-            setUserPosts(snapshot.docs.map((doc) => ({
-                id: doc.id,
-                data: doc.data()
-            }) 
-            )
-        )
-    }) }, [])
+    }, [])
 
     return (
         <Fragment>
@@ -79,11 +71,6 @@ const UserPage = ({ match, currentUser }) => {
                                 <button key={idx} className={toggleActiveStyles(idx)} onClick={() => toggleActive(idx) } >{el.id}</button>
                         ))}
                         </div>
-
-                        {/* <div className="userpage__headerBottomButtonsRight">
-                            <AddFriendButton receiverId={match.params.userId} />
-                            <button>Message</button>
-                        </div> */}
                     </div>
                 </div>
             </div>
@@ -97,11 +84,12 @@ const UserPage = ({ match, currentUser }) => {
                     <div className="userpage__body--right">
                         <CreatePost />
                         <div className="userpage__feed">
-                 {
+                 {/* {
                         userPosts.map((post, id) => (
-                            <Post id={post.id} data={post.data} />
+                            <Post id={post.id} data={post.data}/>
                         ))
-                    }
+                    } */}
+                    <Feed userId={currentUser.id}/>
                 </div>
                     </div>
                 </div>

@@ -93,6 +93,7 @@ const Post = ({ postId, currentUser, data: { userId, image, message, profilePic,
     }
 
     useEffect(() => {
+        // Lists the comments for the associated Post
         firestore.collection('posts').doc(postId).collection('comments').onSnapshot((snapshot) => {
             setPostCommentList(snapshot.docs.map((doc) => ({
                 id: doc.id,
@@ -100,6 +101,7 @@ const Post = ({ postId, currentUser, data: { userId, image, message, profilePic,
             })))
         })
 
+        // Checks if user has liked the post previously to set the like status for the button
         firestore.collection('postLikes').doc(postId).get().then((doc) => {
                 if (doc.data() == undefined) return 
                 const userLikeState = doc.data()[currentUser.id]
@@ -110,14 +112,14 @@ const Post = ({ postId, currentUser, data: { userId, image, message, profilePic,
                 }
         })
 
-         firestore.collection('notifications').where('postId', '==', postId).where('recipient', "==", userId).where('sender', "==", currentUser.id).get().then(querySnapshot => {
-
-            if(querySnapshot.empty) {
-                setNotificationStatus("notSent")
-            } else {
-                setNotificationStatus("sent")
-            }
-        })
+        // Checks if recipient already received notification on post by the same user previously so as to not receive multiple notifications on the same post by the same user
+        //  firestore.collection('notifications').where('postId', '==', postId).where('recipient', "==", userId).where('sender', "==", currentUser.id).get().then(querySnapshot => {
+        //     if(querySnapshot.empty) {
+        //         setNotificationStatus("notSent")
+        //     } else {
+        //         setNotificationStatus("sent")
+        //     }
+        // })
 
     }, [postCommentList, likeStatus, notificationStatus])
   

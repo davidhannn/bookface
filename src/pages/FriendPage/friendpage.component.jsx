@@ -6,6 +6,7 @@ import { selectCurrentUser } from '../../redux/user/user.selectors';
 import Header from '../../components/header/header.component'
 import Spinner from '../../components/spinner/spinner.component';
 
+import Feed from '../../components/feed/feed.component'
 import { IconButton, Avatar } from '@material-ui/core';
 import CameraModel from '../../components/modal/modal.component';
 import ImageAvatar from '../../components/avatar/avatar.component'
@@ -23,7 +24,6 @@ import { firestore } from '../../firebase/firebase.utils';
 const FriendPage = ({ match, currentUser }) => {
     const [user, setUser] = useState({})
     const [loading, setLoading] = useState(true)
-    const [userPosts, setUserPosts] = useState([]);
     const [friendshipStatus, setFriendshipStatus] = useState("");
     const [activeButton, setActiveButton] = useState({
         activeObject: null,
@@ -50,14 +50,6 @@ const FriendPage = ({ match, currentUser }) => {
             setUser(doc.data());
         })
 
-        firestore.collection('posts').where("userId", "==", match.params.userId).onSnapshot((snapshot) => {
-            setUserPosts(snapshot.docs.map((doc) => ({
-                id: doc.id,
-                data: doc.data()
-            }) 
-            )
-        )
-
         firestore.collection('friendships').doc(currentUser.id).get().then(doc => {
             const friendshipStatus = doc.data();
 
@@ -78,7 +70,7 @@ const FriendPage = ({ match, currentUser }) => {
             }
         })
 
-    }) }, [])
+    }, [])
 
     return (
         <Fragment>
@@ -116,11 +108,7 @@ const FriendPage = ({ match, currentUser }) => {
 
 
             <div className="userpage__feed">
-                 {
-                        userPosts.map((post, id) => (
-                            <Post id={post.id} data={post.data} />
-                        ))
-                    }
+                    <Feed userId={match.params.userId}/>
             </div>
         </Fragment>
     )
