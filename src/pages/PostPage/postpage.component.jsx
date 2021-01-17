@@ -2,7 +2,6 @@ import React, { useEffect, useState, Fragment } from 'react'
 import Header from '../../components/header/header.component';
 import { firestore } from '../../firebase/firebase.utils';
 
-import Feed from '../../components/feed/feed.component'
 import Post from '../../components/post/post.component'
 
 const PostPage = ({ match }) => {

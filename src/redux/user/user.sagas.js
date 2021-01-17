@@ -4,7 +4,7 @@ import * as selectors from './user.selectors';
 
 import UserActionTypes from './user.types';
 
-import { signInSuccess, signInFailure, signOutSuccess, signOutFailure, fetchNotificationsSuccess, fetchNotificationsFailure } from './user.actions'
+import { signInSuccess, signInFailure, signOutSuccess, signOutFailure, fetchNotificationsSuccess, fetchNotificationsFailure, editUserDetailSuccess, editUserDetailFailure } from './user.actions'
 
 import { auth, firestore, googleProvider, createUserProfileDocument, getCurrentUser, convertCollectionsSnapshotToMap } from '../../firebase/firebase.utils';
 
@@ -78,10 +78,25 @@ export function* fetchNotifications() {
     }
 }
 
+export function* editUserDetail({ payload: { currentUser, userDetail } }) {
+    try {
+        console.log(userDetail)
+        const user = yield select(selectors.selectCurrentUser)
+        const data = yield firestore.collection('userDetails').doc(user.id).set({
+            bio: userDetail.bio,
+            education: userDetail.education,
+            location: userDetail.location
+        }, {merge: true} )
+        console.log(data)
+        yield put(editUserDetailSuccess(true))
+    } catch(error) {
+        yield put(editUserDetailFailure(error))
+    }
+}
+
 export function* onGoogleSignInStart() {  
     yield takeLatest(UserActionTypes.GOOGLE_SIGN_IN_START, signInWithGoogle)
 }
-
 
 export function* onEmailSignInStart() {
     yield takeLatest(UserActionTypes.EMAIL_SIGN_IN_START, signInWithEmail)
@@ -99,6 +114,10 @@ export function* onFetchNotificationsStart() {
     yield takeLatest(UserActionTypes.FETCH_NOTIFICATIONS_START, fetchNotifications)
 }
 
+export function* onEditUserDetailStart() {
+    yield takeLatest(UserActionTypes.EDIT_USER_DETAIL_START, editUserDetail)
+}
+
 export function* userSagas() {
-    yield all([call(onGoogleSignInStart), call(onEmailSignInStart), call(onCheckUserSession), call(onSignOutStart), call(onFetchNotificationsStart)])
+    yield all([call(onGoogleSignInStart), call(onEmailSignInStart), call(onCheckUserSession), call(onSignOutStart), call(onFetchNotificationsStart), call(onEditUserDetailStart)])
 }

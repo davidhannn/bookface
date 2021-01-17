@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom';
-import { Link } from 'react-router-dom'
 import { firestore } from '../../firebase/firebase.utils'
 import notificationIconComponent from '../notification-icon/notification-icon.component';
 import { Avatar } from '@material-ui/core';
@@ -64,33 +63,6 @@ const NotificationDropdownItem = ({ NotificationInfo }) => {
 
     }
 
-    // const confirmOrDelete = () => {
-
-    //     return (
-      
-            
-    //      <div className="friend-request">
-    //          <Avatar src={profileImgUrl} alt="" />   
-             
-    //      {  friendRequestStatus == "pending" ? 
-    //         <div>
-    //             <span><span style={{fontWeight: "bold"}}>{firstName} {lastName}</span> sent you a friend request</span>
-    //             <div className="button-row">
-    //                 <button className="confirm-button" onClick={handleClick} value="confirm">Confirm</button>
-    //                 <button className="delete-button" value="delete" onClick={handleClick}>Delete</button>
-    //             </div>
-    //         </div>
-    //                 :
-    //         friendRequestStatus == "approve" ? <span>Friend Request Sent!</span> :
-    //         friendRequestStatus == "deny" ? <span>Friend Request Deleted</span> : 
-    //         null
-    //     }
-    //     </div>
-    
-
-    //     )
-    // }
-
     return (
         <li>
             {type == "like" ? 
@@ -106,7 +78,7 @@ const NotificationDropdownItem = ({ NotificationInfo }) => {
 
                 <Avatar src={profileImgUrl} alt="" />      
                         <div className="notification-dropdown-item">
-                                <span style={{fontWeight: "bold"}}>{firstName} {lastName} &nbsp;commented your post</span>
+                                <span style={{fontWeight: "bold"}}>{firstName} {lastName} &nbsp;commented on your post</span>
                         </div>
             </a> : 
 
@@ -123,8 +95,8 @@ const NotificationDropdownItem = ({ NotificationInfo }) => {
                         </div>
                     </div>
                             :
-                    friendRequestStatus == "approve" ? <span>Friend Request has been confirmed</span> :
-                    friendRequestStatus == "deny" ? <span>Friend Request has been deleted</span> : 
+                    friendRequestStatus == "approve" ? <span>Friend Request with <span style={{fontWeight: "bold"}}>{firstName} {lastName}</span> has been confirmed</span> :
+                    friendRequestStatus == "deny" ? <span>Friend Request with <span style={{fontWeight: "bold"}}>{firstName} {lastName}</span> has been deleted</span> : 
                     null
             }
                 </div>

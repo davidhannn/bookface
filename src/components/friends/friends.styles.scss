@@ -19,10 +19,21 @@
 .friend-container-single {
     display: flex;
     flex-direction: column;
+
+    #Capa_1 {
+        width: 80px;
+        height: 80px;
+        border-radius: 8px;
+    }
 }
 
 .friend-container-image {
     width: 80px;
     height: 80px;
     border-radius: 8px;
+}
+
+MuiSvgIcon-root {
+    width: 100px;
+    height: 100px;
 }

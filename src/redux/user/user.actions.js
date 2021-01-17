@@ -1,7 +1,5 @@
 import UserActionTypes from './user.types';
 
-// import { createUserProfileDocument } from '../../firebase/firebase.utils';
-
 export const setCurrentUser = user => ({
     type: UserActionTypes.SET_CURRENT_USER,
     payload: user
@@ -10,16 +8,6 @@ export const setCurrentUser = user => ({
 export const googleSignInStart = () => ({
     type: UserActionTypes.GOOGLE_SIGN_IN_START
 })
-
-// export const googleSignInSuccess = (user) => ({
-//     type: UserActionTypes.GOOGLE_SIGN_IN_SUCCESS,
-//     payload: user
-// }) 
-
-// export const googleSignInFailure = (error) => ({
-//     type: UserActionTypes.GOOGLE_SIGN_IN_FAILURE,
-//     payload: error
-// })
 
 export const emailSignInStart = (emailAndPassword) => ({
     type: UserActionTypes.EMAIL_SIGN_IN_START,
@@ -64,5 +52,20 @@ export const fetchNotificationsSuccess = (notifications) => ({
 
 export const fetchNotificationsFailure = (error) => ({
     type: UserActionTypes.FETCH_NOTIFICATIONS_FAILURE,
+    payload: error
+})
+
+export const editUserDetailStart = (userAndDetail) => ({
+    type: UserActionTypes.EDIT_USER_DETAIL_START,
+    payload: userAndDetail
+})
+
+export const editUserDetailSuccess = (bool) => ({
+    type: UserActionTypes.EDIT_USER_DETAIL_START,
+    payload: bool
+})
+
+export const editUserDetailFailure = (error) => ({
+    type: UserActionTypes.EDIT_USER_DETAIL_START,
     payload: error
 })

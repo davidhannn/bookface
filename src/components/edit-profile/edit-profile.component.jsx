@@ -1,12 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import TextField from '@material-ui/core/TextField';
+
+import { createStructuredSelector } from 'reselect';
+
+import { selectCurrentUser } from '../../redux/user/user.selectors';
+import { editUserDetailStart } from '../../redux/user/user.actions';
 
 import './edit-profile.styles.scss'
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    '& > *': {
+      display: 'flex',
+      flexDirection: 'column',
+      margin: theme.spacing(1),
+      width: '25ch',
+    },
+  },
   modal: {
     display: 'flex',
     alignItems: 'center',
@@ -26,9 +41,12 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function EditProfile() {
+const EditProfile = ({ currentUser, editUserDetailStart }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const [userDetail, setUserDetail] = useState({ bio: "", location: "", education: "" })
+
+  const { bio, location, education } = userDetail
 
   const handleOpen = () => {
     setOpen(true);
@@ -37,6 +55,16 @@ export default function EditProfile() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setUserDetail({ ...userDetail, [name]: value})
+  }
+
+  const handleClick = (e) => {
+    e.preventDefault()
+    editUserDetailStart(currentUser, userDetail)
+  }
 
   return (
     <div>
@@ -58,10 +86,28 @@ export default function EditProfile() {
         <Fade in={open}>
           <div className={classes.paper}>
             <h2 id="transition-modal-title">Edit Details</h2>
-            <p id="transition-modal-description">react-transition-group animates me.</p>
+            <form className={classes.root} noValidate autoComplete="off">
+                <TextField id="outlined-basic" label="Bio" variant="outlined" name="bio" value={bio} onChange={handleChange}/>
+                <TextField id="outlined-basic" label="Current Location" variant="outlined"  name="location" value={location} onChange={handleChange}/>
+                <TextField id="outlined-basic" label="Education" variant="outlined" name="education" value={education} onChange={handleChange}/>
+              </form>
+              <div className="button-container">  
+                  <button className="cancel-button" onClick={handleClick}>Cancel</button>
+                  <button className="save-button" type="submit" onClick={handleClick}>Save</button>
+              </div>
           </div>
         </Fade>
       </Modal>
     </div>
   );
 }
+
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser
+})
+
+const mapDispatchToProps = dispatch => ({
+  editUserDetailStart: (currentUser, userDetail) => dispatch(editUserDetailStart({currentUser, userDetail}))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditProfile);

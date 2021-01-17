@@ -3,3 +3,33 @@
     width: 80%;
     padding: 10px 10px;
 }
+
+
+
+.button-container {
+    display: flex;
+    flex-direction: flex-end;
+}
+
+.cancel-button {
+    border-style: none;
+    padding: 2px 8px;
+    height: 35px;
+    border-radius: 6px;
+}
+
+.save-button {
+        display: flex;
+        flex-direction: row;
+        padding: 2px 8px;
+        height: 35px;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        justify-content: center;
+        align-items: center;
+        background-color: #2e81f4;
+        span {
+            margin-left: 10px;
+        }
+}

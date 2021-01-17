@@ -6,6 +6,9 @@ import { selectCurrentUser } from '../../redux/user/user.selectors';
 import Header from '../../components/header/header.component'
 import Spinner from '../../components/spinner/spinner.component';
 
+import About from '../../components/about/about.component'
+import Friends from '../../components/friends/friends.component'
+
 import Feed from '../../components/feed/feed.component'
 import { IconButton, Avatar } from '@material-ui/core';
 import CameraModel from '../../components/modal/modal.component';
@@ -107,9 +110,21 @@ const FriendPage = ({ match, currentUser }) => {
             </div>
 
 
-            <div className="userpage__feed">
+            <div className="userpage__body">
+                    <div className="userpage__body--left">
+                        <Friends userId={match.params.userId} />
+                    </div>
+                    <div className="userpage__body--right">
+                        <div className="userpage__feed">
+                 {/* {
+                        userPosts.map((post, id) => (
+                            <Post id={post.id} data={post.data}/>
+                        ))
+                    } */}
                     <Feed userId={match.params.userId}/>
-            </div>
+                </div>
+                    </div>
+                </div>
         </Fragment>
     )
 }

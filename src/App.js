@@ -13,16 +13,19 @@ import FriendPage from './pages/FriendPage/friendpage.component';
 import SearchPage from './pages/SearchPage/searchpage.component';
 import PostPage from './pages/PostPage/postpage.component';
 
-import { auth, createUserProfileDocument } from './firebase/firebase.utils';
-
 import { setCurrentUser, checkUserSession } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selectors';
 import { CheckCircleOutline } from '@material-ui/icons';
 
+import Spinner from './components/spinner/spinner.component.jsx'
+
 const App = ({ checkUserSession, currentUser }) => {
+
+  const [userAuth, setUserAuth] = useState(null);
 
   useEffect(() => {
     checkUserSession();
+    setUserAuth(JSON.parse(localStorage.getItem('userAuth')))
   }, [])
  
   return (
@@ -36,15 +39,15 @@ const App = ({ checkUserSession, currentUser }) => {
           return (  currentUser.id === userId ? (<UserPage match={match}/>) : (<FriendPage match={match}/>) )
             }
           }/>
-        {/* <Route path='/user/:userId' component={FriendPage} /> */}
         <Route path='/search/:text' component={SearchPage} />
         <Route path='/post/:postId' component={PostPage} />
       </Switch>
     </div>
-  );
- 
+    )
 
 }
+
+
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser

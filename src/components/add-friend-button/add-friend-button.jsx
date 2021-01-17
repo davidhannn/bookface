@@ -15,7 +15,6 @@ const AddFriendButton = ({ currentUser, receiverId }) => {
     const [requestStatus, setRequestStatus] = useState(false);
 
     useEffect(() => {
-
     }, [requestStatus])
 
     const handleClick = () => {

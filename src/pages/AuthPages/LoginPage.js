@@ -21,12 +21,6 @@ const LoginPage = ({ googleSignInStart, emailSignInStart }) => {
         e.preventDefault();
 
         emailSignInStart(email, password)
-        // try {
-        //     await auth.signInWithEmailAndPassword(email, password);
-        //     setLoginCredentials({ email: "", password: ""})
-        // } catch(error) {
-        //     console.error(error);
-        // }
     }
 
     return (
