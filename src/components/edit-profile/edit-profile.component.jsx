@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
@@ -7,6 +7,8 @@ import Fade from '@material-ui/core/Fade';
 import TextField from '@material-ui/core/TextField';
 
 import { createStructuredSelector } from 'reselect';
+
+import { firestore } from '../../firebase/firebase.utils'
 
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 import { editUserDetailStart } from '../../redux/user/user.actions';
@@ -41,12 +43,22 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const EditProfile = ({ currentUser, editUserDetailStart }) => {
+const EditProfile = ({ currentUser, editUserDetailStart, userId }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [userDetail, setUserDetail] = useState({ bio: "", location: "", education: "" })
 
   const { bio, location, education } = userDetail
+
+  useEffect(() => {
+
+    firestore.collection('userDetails').doc(userId).onSnapshot((snapshot) => {
+      setUserDetail(snapshot.data())
+  })
+
+  }, [])
+
+  console.log(userDetail)
 
   const handleOpen = () => {
     setOpen(true);
@@ -87,12 +99,12 @@ const EditProfile = ({ currentUser, editUserDetailStart }) => {
           <div className={classes.paper}>
             <h2 id="transition-modal-title">Edit Details</h2>
             <form className={classes.root} noValidate autoComplete="off">
-                <TextField id="outlined-basic" label="Bio" variant="outlined" name="bio" value={bio} onChange={handleChange}/>
+                <TextField id="outlined-basic" label="Bio" variant="outlined" name="bio" value={bio} onChange={handleChange} fullWidth/>
                 <TextField id="outlined-basic" label="Current Location" variant="outlined"  name="location" value={location} onChange={handleChange}/>
                 <TextField id="outlined-basic" label="Education" variant="outlined" name="education" value={education} onChange={handleChange}/>
               </form>
               <div className="button-container">  
-                  <button className="cancel-button" onClick={handleClick}>Cancel</button>
+                  <button className="cancel-button" onClick={handleClose}>Cancel</button>
                   <button className="save-button" type="submit" onClick={handleClick}>Save</button>
               </div>
           </div>

@@ -61,11 +61,11 @@ export const editUserDetailStart = (userAndDetail) => ({
 })
 
 export const editUserDetailSuccess = (bool) => ({
-    type: UserActionTypes.EDIT_USER_DETAIL_START,
+    type: UserActionTypes.EDIT_USER_DETAIL_SUCCESS,
     payload: bool
 })
 
 export const editUserDetailFailure = (error) => ({
-    type: UserActionTypes.EDIT_USER_DETAIL_START,
+    type: UserActionTypes.EDIT_USER_DETAIL_FAILURE,
     payload: error
 })

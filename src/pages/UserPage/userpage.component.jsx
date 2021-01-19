@@ -48,6 +48,7 @@ const UserPage = ({ match, currentUser }) => {
             setUser(doc.data());
         })
 
+
     }, [])
 
     return (
@@ -78,17 +79,12 @@ const UserPage = ({ match, currentUser }) => {
                 
                 <div className="userpage__body">
                     <div className="userpage__body--left">
-                        <About />
+                        <About userId={currentUser.id} />
                         <Friends userId={currentUser.id} />
                     </div>
                     <div className="userpage__body--right">
                         <CreatePost />
                         <div className="userpage__feed">
-                 {/* {
-                        userPosts.map((post, id) => (
-                            <Post id={post.id} data={post.data}/>
-                        ))
-                    } */}
                     <Feed userId={currentUser.id}/>
                 </div>
                     </div>

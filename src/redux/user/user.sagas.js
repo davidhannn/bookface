@@ -80,14 +80,12 @@ export function* fetchNotifications() {
 
 export function* editUserDetail({ payload: { currentUser, userDetail } }) {
     try {
-        console.log(userDetail)
         const user = yield select(selectors.selectCurrentUser)
         const data = yield firestore.collection('userDetails').doc(user.id).set({
             bio: userDetail.bio,
             education: userDetail.education,
             location: userDetail.location
         }, {merge: true} )
-        console.log(data)
         yield put(editUserDetailSuccess(true))
     } catch(error) {
         yield put(editUserDetailFailure(error))
