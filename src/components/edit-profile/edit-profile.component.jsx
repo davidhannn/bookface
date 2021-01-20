@@ -48,17 +48,17 @@ const EditProfile = ({ currentUser, editUserDetailStart, userId }) => {
   const [open, setOpen] = React.useState(false);
   const [userDetail, setUserDetail] = useState({ bio: "", location: "", education: "" })
 
-  const { bio, location, education } = userDetail
 
   useEffect(() => {
-
     firestore.collection('userDetails').doc(userId).onSnapshot((snapshot) => {
+      if(!snapshot.exists) {
+        setUserDetail({ bio: "", location: "", education: ""})
+      } else {
       setUserDetail(snapshot.data())
+      }
   })
-
   }, [])
 
-  console.log(userDetail)
 
   const handleOpen = () => {
     setOpen(true);
@@ -77,6 +77,8 @@ const EditProfile = ({ currentUser, editUserDetailStart, userId }) => {
     e.preventDefault()
     editUserDetailStart(currentUser, userDetail)
   }
+
+  // const { bio, location, education } = userDetail
 
   return (
     <div>
@@ -99,9 +101,9 @@ const EditProfile = ({ currentUser, editUserDetailStart, userId }) => {
           <div className={classes.paper}>
             <h2 id="transition-modal-title">Edit Details</h2>
             <form className={classes.root} noValidate autoComplete="off">
-                <TextField id="outlined-basic" label="Bio" variant="outlined" name="bio" value={bio} onChange={handleChange} fullWidth/>
-                <TextField id="outlined-basic" label="Current Location" variant="outlined"  name="location" value={location} onChange={handleChange}/>
-                <TextField id="outlined-basic" label="Education" variant="outlined" name="education" value={education} onChange={handleChange}/>
+                <TextField id="outlined-basic" label="Bio" variant="outlined" name="bio" value={userDetail.bio} onChange={handleChange} fullWidth/>
+                <TextField id="outlined-basic" label="Current Location" variant="outlined"  name="location" value={userDetail.location} onChange={handleChange}/>
+                <TextField id="outlined-basic" label="Education" variant="outlined" name="education" value={userDetail.education} onChange={handleChange}/>
               </form>
               <div className="button-container">  
                   <button className="cancel-button" onClick={handleClose}>Cancel</button>

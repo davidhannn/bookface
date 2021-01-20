@@ -4,6 +4,8 @@ import { firestore } from '../../firebase/firebase.utils';
 
 import Post from '../../components/post/post.component'
 
+import './postpage.styles.scss'
+
 const PostPage = ({ match }) => {
 
     const [postData, setPostData] = useState({})
@@ -16,7 +18,9 @@ const PostPage = ({ match }) => {
     return (
         <Fragment>
             <Header />
-                <Post postId={match.params.postId} data={postData}/>
+            <div className="post-container">
+                    <Post postId={match.params.postId} data={postData}/>
+            </div>
         </Fragment>
     )
 }

@@ -112,6 +112,7 @@ const FriendPage = ({ match, currentUser }) => {
 
             <div className="userpage__body">
                     <div className="userpage__body--left">
+                        <About userId={match.params.id} />
                         <Friends userId={match.params.userId} />
                     </div>
                     <div className="userpage__body--right">

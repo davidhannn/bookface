@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
 
 import EditProfile from '../edit-profile/edit-profile.component'
 
@@ -9,20 +10,26 @@ import { ReactComponent as EducationIcon } from '../../icons/education.svg';
 
 import { firestore } from '../../firebase/firebase.utils'
 import './about.styles.scss'
+import { createStructuredSelector } from 'reselect';
+import { selectCurrentUser } from '../../redux/user/user.selectors';
 
-const About = ({ userId }) => {
+const About = ({ userId, currentUser }) => {
 
     const [userInfo, setUserInfo] = useState({})
 
     const { bio, education, location } = userInfo
-    
+
     useEffect(() => {
         firestore.collection('userDetails').doc(userId).onSnapshot((snapshot) => {
+            if(!snapshot.exists) {
+                setUserInfo({ bio: "", education: "", location: ""})
+            } else {
             setUserInfo(snapshot.data())
+            }
         })
-    }, [])
+    }, [userInfo])
 
-    console.log(userInfo)
+    
 
     return (
         <div className="about-container">
@@ -30,9 +37,13 @@ const About = ({ userId }) => {
             { bio ? <span> <BookIcon /> {bio}</span> : null }
             { education ? <span> <EducationIcon /> Went to {education} </span> : null }
             { location ? <span> <HomeIcon /> Lives in {location} </span> : null }
-            <EditProfile userId={userId}/>
+            { currentUser.id === userId ? <EditProfile userId={userId}/> : null}
         </div>
     )
 }
 
-export default About;
+const mapStateToProps = createStructuredSelector({
+    currentUser: selectCurrentUser
+})
+
+export default connect(mapStateToProps)(About);
