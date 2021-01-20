@@ -15,10 +15,13 @@ $button-color: #eff2f5;
   border-bottom: 1px solid $button-color;
   padding-bottom: 15px;
   padding: 15px;
+  box-sizing: border-box;
 
   form {
     flex: 1;
     display: flex;
+    width: 100%;
+    object-fit: contain;
 
     input {
       flex: 1;
@@ -28,6 +31,7 @@ $button-color: #eff2f5;
       margin: 0 10px;
       border-radius: 999px;
       background-color: $button-color;
+      width: 100%;
     }
 
     button {

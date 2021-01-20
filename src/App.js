@@ -21,12 +21,9 @@ import Spinner from './components/spinner/spinner.component.jsx'
 
 const App = ({ checkUserSession, currentUser }) => {
 
-  const [userAuth, setUserAuth] = useState(null);
-
   useEffect(() => {
     checkUserSession();
-    setUserAuth(JSON.parse(localStorage.getItem('userAuth')))
-  }, [])
+  }, [checkUserSession])
  
   return (
     <div className="App">

@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2, 4, 3),
   },
   button: {
-      width: "80%",
+      width: "100%",
       borderStyle: 'none',
       padding: '10px 10px',
       borderRadius: '8px',
@@ -81,7 +81,7 @@ const EditProfile = ({ currentUser, editUserDetailStart, userId }) => {
   // const { bio, location, education } = userDetail
 
   return (
-    <div>
+    <div className="edit-button-container">
       <button type="edit-button" className={classes.button} onClick={handleOpen}>
         Edit Details
       </button>

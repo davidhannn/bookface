@@ -34,27 +34,13 @@ const Header = ({ currentUser }) => (
                 <Link to="/">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/1920px-Facebook_f_logo_%282019%29.svg.png" />
                 </Link>
-                {/* <div className="header__input"> */}
                     <Search />
-                {/* </div> */}
             </div>
 
             <div className="header__middle">
                 <div className="header__icon header__icon--active">
                     <HomeIcon fontSize="large"/>
                 </div>
-                {/* <div className="header__icon">
-                    <VideoLabelIcon fontSize="large"/>
-                </div>
-                <div className="header__icon">
-                    <StorefrontIcon fontSize="large"/>
-                </div>
-                <div className="header__icon">
-                    <SupervisedUserCircleIcon fontSize="large"/>
-                </div>
-                <div className="header__icon">
-                    <SportsEsportsIcon fontSize="large"/>
-                </div> */}
             </div>
 
             <div className="header__right">

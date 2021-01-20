@@ -2,26 +2,28 @@
     display: flex;
     align-items: center;
     border-radius: 8px;
-    // transition: background $speed;
     padding: 0.5rem;
     color: black;
     overflow: hidden;
 
 }
 
-li {
+li a{
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
     padding: 0.2rem;
     border-radius: 8px;
+    color:rgb(77, 75, 75);
     margin: 2px;
     font-size: 16px;
+    font-weight: lighter;
     width: 100%;
     height: 100%;
     &:hover {
         background-color: #bdbaba;
+        list-style: none;
     }
 }
 

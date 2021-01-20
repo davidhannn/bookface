@@ -9,7 +9,7 @@ import './notification-dropdown-item.styles.scss'
 const NotificationDropdownItem = ({ NotificationInfo }) => {
 
     const [senderData, setSenderData] = useState({});
-    const [friendRequestStatus, setFriendRequestStatus] = useState("pending");
+    const [friendRequestStatus, setFriendRequestStatus] = useState("");
     const history = useHistory();
 
     const { createdAt, postId, read, recipient, sender, type, status } = NotificationInfo;
@@ -22,7 +22,9 @@ const NotificationDropdownItem = ({ NotificationInfo }) => {
             firestore.collection('friendships').doc(sender).get().then(doc => {
                 const friendshipStatus = doc.data()[recipient];
 
-                if (friendshipStatus == true) {
+                if (friendshipStatus == undefined) {
+                    setFriendRequestStatus("pending")
+                } else if (friendshipStatus == true) {
                     setFriendRequestStatus("approve")
                 } else {
                     setFriendRequestStatus("deny")
@@ -34,7 +36,6 @@ const NotificationDropdownItem = ({ NotificationInfo }) => {
 
     const { firstName, lastName, profileImgUrl } = senderData
     
-    console.log(friendRequestStatus)
 
     const handleClick = (e) => {
     

@@ -14,3 +14,24 @@
     }
 
 }
+
+@media screen and (max-width: 550px) {
+  .search__input {
+    display: flex;
+    align-items: center;
+    background-color: #eff2f5;
+    padding: 5px;
+    height: 40px;
+    width: 40px;
+    margin-left: 10px;
+    border-radius: 999px;
+
+    input {
+      width: 40px;
+
+      &::placeholder {
+        color: transparent
+      }
+    }
+  }
+}

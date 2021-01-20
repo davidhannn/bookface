@@ -43,16 +43,17 @@
 .userpage__body {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     margin: 0 auto;
     width: 85%;
+    // height: calc(100vh - 554px)
 }
 .userpage__body--left {
-    width: 30%;
+    width: 35%;
 }
 
 .userpage__body--right {
-    width: 65%;
+    width: 60%;
 }
 
 .userpage__feed {
@@ -86,3 +87,19 @@ button {
     outline: none;
 }
 
+@media screen and (max-width: 1030px) {
+
+    .userpage__body {
+        display: flex;
+        flex-direction: column;
+        width: 95%;
+    }
+
+    .userpage__body--left {
+        width: 100%;
+    }
+    
+    .userpage__body--right {
+        width: 100%;
+    }
+}
