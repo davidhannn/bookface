@@ -23,7 +23,7 @@ const App = ({ checkUserSession, currentUser }) => {
 
   useEffect(() => {
     checkUserSession();
-  }, [checkUserSession])
+  }, [])
  
   return (
     <div className="App">

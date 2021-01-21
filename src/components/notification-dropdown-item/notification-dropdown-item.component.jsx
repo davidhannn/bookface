@@ -21,8 +21,7 @@ const NotificationDropdownItem = ({ NotificationInfo }) => {
 
             firestore.collection('friendships').doc(sender).get().then(doc => {
                 const friendshipStatus = doc.data()[recipient];
-
-                if (friendshipStatus == undefined) {
+                if (friendshipStatus == "pending") {
                     setFriendRequestStatus("pending")
                 } else if (friendshipStatus == true) {
                     setFriendRequestStatus("approve")
@@ -31,7 +30,7 @@ const NotificationDropdownItem = ({ NotificationInfo }) => {
                 }
             })
 
-    }, [friendRequestStatus])
+    }, [])
 
 
     const { firstName, lastName, profileImgUrl } = senderData
@@ -65,12 +64,12 @@ const NotificationDropdownItem = ({ NotificationInfo }) => {
     }
 
     return (
-        <li>
+        <li className="notification-dropdown-item">
             {type == "like" ? 
             <a href="#" onClick={() => history.push(`/post/${postId}`)}>
 
                 <Avatar src={profileImgUrl} alt="" />      
-                        <div className="notification-dropdown-item">
+                        <div className="notification-dropdown-text">
                                 <span style={{fontWeight: "bold"}}>{firstName} {lastName} &nbsp;liked your post</span>
                         </div>
                 </a> : 
@@ -78,7 +77,7 @@ const NotificationDropdownItem = ({ NotificationInfo }) => {
             <a href="#" onClick={() => history.push(`/post/${postId}`)}>
 
                 <Avatar src={profileImgUrl} alt="" />      
-                        <div className="notification-dropdown-item">
+                        <div className="notification-dropdown-text">
                                 <span style={{fontWeight: "bold"}}>{firstName} {lastName} &nbsp;commented on your post</span>
                         </div>
             </a> : 
@@ -88,7 +87,7 @@ const NotificationDropdownItem = ({ NotificationInfo }) => {
             <Avatar src={profileImgUrl} alt="" />   
             
             {  friendRequestStatus == "pending" ? 
-                    <div>
+                    <div className="friend-request-item">
                         <span><span style={{fontWeight: "bold"}}>{firstName} {lastName}</span> sent you a friend request</span>
                         <div className="button-row">
                             <button className="confirm-button" onClick={handleClick} value="confirm">Confirm</button>
@@ -96,8 +95,8 @@ const NotificationDropdownItem = ({ NotificationInfo }) => {
                         </div>
                     </div>
                             :
-                    friendRequestStatus == "approve" ? <span>Friend Request with <span style={{fontWeight: "bold"}}>{firstName} {lastName}</span> has been confirmed</span> :
-                    friendRequestStatus == "deny" ? <span>Friend Request with <span style={{fontWeight: "bold"}}>{firstName} {lastName}</span> has been deleted</span> : 
+                    friendRequestStatus == "approve" ? <span>Friend Request with<span style={{fontWeight: "bold"}}>{firstName} {lastName}</span> has been confirmed</span> :
+                    friendRequestStatus == "deny" ? <span>Friend Request with<span style={{fontWeight: "bold"}}>{firstName} {lastName}</span> has been deleted</span> : 
                     null
             }
                 </div>

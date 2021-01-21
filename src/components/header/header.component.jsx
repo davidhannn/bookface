@@ -44,16 +44,16 @@ const Header = ({ currentUser }) => (
             </div>
 
             <div className="header__right">
-                <Link to={`/user/${currentUser.id}`} >
+                <Link to={`/user/${currentUser.id}`} style={{textDecoration: 'none'}} >
                 <div className="header__user_info">
                     <Avatar src={currentUser.profileImgUrl} />
-                    <h5>{currentUser.firstName}</h5>
+                    <span className="header__userName">{currentUser.firstName}</span>
                 </div>
                 </Link>
 
                 <NotificationIcon userId={currentUser.id} />
-
-                {/* <DropdownButton currentUser={currentUser} />  */}
+{/* 
+                <DropdownButton currentUser={currentUser} />  */}
                 <Navbar />
 
             </div>

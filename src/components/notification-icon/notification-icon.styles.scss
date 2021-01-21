@@ -8,15 +8,15 @@ $border-radius: 8px;
 $speed: 500ms; 
 
 
-ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
+// ul {
+//     list-style: none;
+//     margin: 0;
+//     padding: 0;
+// }
 
-a {
-    text-decoration: none;
-}
+// a {
+//     text-decoration: none;
+// }
 
 
 
@@ -31,13 +31,6 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: filter 300ms;
-
-    svg {
-        width: 20px;
-        height: 20px;
-    }
-
     &:hover {
         background-color: rgb(153, 151, 151);
     }
@@ -46,12 +39,12 @@ a {
 
 .notification-dropdown {
     position: absolute;
-    top: 60px;
-    width: 350px;
+    top: 65px;
+    width: 400px;
     transform: translateX(-30%);
     background-color: white;
     border-radius: 8px;
-    padding: 0.5rem;
+    padding: 0.3rem;
     overflow: hidden;
     z-index: 200;
 }

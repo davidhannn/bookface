@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import './add-friend-button.styles.scss';
 
 import { firestore } from '../../firebase/firebase.utils'
+import firebase from 'firebase';
 
 import { selectCurrentUser } from '../../redux/user/user.selectors'
 import { createStructuredSelector } from 'reselect';
@@ -19,14 +20,15 @@ const AddFriendButton = ({ currentUser, receiverId }) => {
 
     const handleClick = () => {
         firestore.collection('friendships').doc(currentUser.id).set({
-            [receiverId]: false
-         })
+            [receiverId]: "pending"
+         }, { merge: true})
 
          firestore.collection('notifications').add({
              sender: currentUser.id,
              recipient: receiverId,
              status: "pending",
-             type: "friendship"
+             type: "friendship",
+             createdAt: firebase.firestore.FieldValue.serverTimestamp()
          })
 
          setRequestStatus(true);

@@ -59,19 +59,22 @@ const FriendPage = ({ match, currentUser }) => {
             // Creating a document with the Current User ID set to null if currentUser has no friends in firestore and therefore no document
             if (friendshipStatus === undefined) {
                 firestore.collection('friendships').doc(currentUser.id).set({
-                    nullField: null
+                    [match.params.id]: false
                 })
-            }
+                setFriendshipStatus("sendFriendRequest")
+            } else {
            
 
-            if (friendshipStatus[match.params.userId] === undefined) {
+            if (friendshipStatus[match.params.userId] == undefined) {
                 setFriendshipStatus("sendFriendRequest")
             } else if (friendshipStatus[match.params.userId] === true) {
                 setFriendshipStatus("friends")
             } else {
                 setFriendshipStatus("friendRequestSent")
             }
-        })
+        }
+    }        
+        )
 
     }, [])
 
