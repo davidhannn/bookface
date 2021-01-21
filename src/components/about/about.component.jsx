@@ -33,10 +33,28 @@ const About = ({ userId, currentUser }) => {
 
     return (
         <div className="about-container">
-            <h5>Intro</h5>
-            { bio ? <span> <BookIcon /> {bio}</span> : null }
-            { education ? <span> <EducationIcon /> Went to {education} </span> : null }
-            { location ? <span> <HomeIcon /> Lives in {location} </span> : null }
+            <h6>Intro</h6>
+            {/* { bio ? 
+                <div className="about-container-row">
+                    <span> <BookIcon /> {bio}</span> 
+                </div>
+                : null } */}
+            { education ? 
+                <div className="about-container-row">
+                    <HomeIcon />
+                    <div className="about-container-row-description">
+                        Went to <span style={{fontWeight: 'bold'}}>{education} </span>
+                    </div>
+                </div>
+                : null }
+            { location ? 
+                <div className="about-container-row">
+                    <EducationIcon /> 
+                    <div className="about-container-row-description">
+                        Lives in {location}
+                    </div>
+                </div> 
+                : null }
             { currentUser.id === userId ? <EditProfile userId={userId}/> : null}
         </div>
     )

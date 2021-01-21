@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 // import { signUp } from '../../redux/user/user.actions.js';
-import FormInput from '../form-input/form-input.component';
-import CustomButton from '../custom-button/custom-button.component';
+import TextField from '@material-ui/core/TextField';
+
 import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
 import './register.styles.scss';
 
@@ -13,11 +13,6 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        // if (password !== confirmPassword ) {
-        //     alert('Passwords do not match. Try again')
-        //     return;
-        // }
 
         try {
             const { user } = await auth.createUserWithEmailAndPassword(email, password);
@@ -40,16 +35,18 @@ const Register = () => {
     }
 
     return (
-                // <h2>Sign Up </h2>
-                <form onSubmit={handleSubmit}>
-
-                    <FormInput name="firstName" type="text" value={firstName} onChange={handleChange} label="First Name" required/>
-                    <FormInput name="lastName" type="text" value={lastName} onChange={handleChange} label="Last Name" required/>
-                    <FormInput name="email" type="email" value={email} type="email" onChange={handleChange} label="Email" required />
-                    <FormInput name="password" type="password" value={password} type="password" onChange={handleChange} label="Password" required />
-                    <FormInput name="confirmPassword" type="password" value={confirmPassword} type="password" onChange={handleChange} label="Confirm Password" required/>
-                    <CustomButton type="submit">Register</CustomButton>
-                </form>
+                <div className="register-page">
+                    <form className="register-container" onSubmit={handleSubmit}>
+                        <h3 style={{ fontWeight: "bold" }}>Sign Up</h3>
+                        <TextField name="firstName" type="text" value={firstName} onChange={handleChange} required id="outline-required" label="First Name" variant="outlined" defaultValue="" />
+                        <TextField name="lastName" type="text" value={lastName} onChange={handleChange} required id="outline-required" label="Last Name" variant="outlined" defaultValue="" />
+                        <TextField name="email" type="email" value={email} onChange={handleChange} required id="outline-required" label="Email" variant="outlined" defaultValue="" />
+                        <TextField name="password" type="password" value={password} onChange={handleChange} required id="outline-required" label="Password" variant="outlined" defaultValue="" />
+                        <TextField name="confirmPassword" type="password" value={confirmPassword} onChange={handleChange} required id="outline-required" label="Confirm Password" variant="outlined" defaultValue="" />
+                        <button type="submit" className="register-button">Create Account</button>
+                        <p>Already a member? <a href="/login"><span style={{ color: '#2e81f4' }}>Sign In</span></a></p>
+                    </form>
+                </div>
     )
 }
 

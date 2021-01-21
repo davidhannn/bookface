@@ -63,3 +63,13 @@ $button-color: #eff2f5;
     }
   }
 }
+
+@media screen and (max-width: 530px) {
+   .createPost__button {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    color: gray;
+    margin: 5px;
+   }
+}

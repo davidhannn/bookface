@@ -5,8 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect'
 
-import LoginPage from './pages/AuthPages/LoginPage';
-import RegisterPage from './pages/AuthPages/RegisterPage';
+import LoginPage from './pages/AuthPages/loginpage.component.jsx';
+import RegisterPage from './pages/AuthPages/registerpage.component.jsx';
 import HomePage from './pages/HomePage/homepage.component';
 import UserPage from './pages/UserPage/userpage.component';
 import FriendPage from './pages/FriendPage/friendpage.component';

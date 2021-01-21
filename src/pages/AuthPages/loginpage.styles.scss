@@ -1,32 +1,16 @@
-// .register-page {    
-//     background-color: #eff2f5;
-// }
-
-.register-container {
+.login-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 0 auto;
     height: 100vh;
     width: 100%;
     background-color: white;
 }
 
-// .register-container-name {
-//     display: flex;
-//     flex-direction: row;
-//     justify-content: space-around;
-//     align-items: center;
-//     width: 80%;
-//     margin-bottom: 15px;
-// }
 
-.MuiFormControl-root.MuiTextField-root{
-    width: 70%;
-    margin-top: 20px;
-}
-
-.register-button {
+.sign-in-button {
     display: flex;
     flex-direction: row;
     padding: 8px 8px;
@@ -34,6 +18,7 @@
     color: white;
     border: none;
     border-radius: 6px;
+    width: 70%;
     margin: 20px;
     justify-content: center;
     align-items: center;

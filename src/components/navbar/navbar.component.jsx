@@ -3,6 +3,8 @@ import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+
 import { Link } from 'react-router-dom'
 import Avatar from '../avatar/avatar.component'
 import './navbar.styles.scss';
@@ -43,10 +45,17 @@ const NavItem = (props) => {
 const DropDownMenu = ({ currentUser, signOutStart }) => {
     const history = useHistory();
 
+    const [open, setOpen] = useState(false);
+
+    const handleClickAway = () => {
+        setOpen(false);
+    };
+
     const [activeMenu, setActiveMenu] = useState('main')
 
     function DropdownItem(props) {
         return (
+            <ClickAwayListener onClickAway={handleClickAway}>
             <a href="#" className="menu-item" onClick={props.action}>
                     <span className="icon-button">{props.leftIcon}</span>
  
@@ -54,6 +63,7 @@ const DropDownMenu = ({ currentUser, signOutStart }) => {
 
                     <span className="icon-right">{props.rightIcon}</span>
             </a>
+            </ClickAwayListener>
         )
     }
 
@@ -76,9 +86,11 @@ const DropDownMenu = ({ currentUser, signOutStart }) => {
 const Navbar = ({ currentUser, signOutStart }) => {
 
     return (
+        
             <NavItem icon={<CaretIcon />}>
                 <DropDownMenu currentUser={currentUser} signOutStart={signOutStart} />
             </NavItem >
+        
     )
 }
 

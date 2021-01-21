@@ -51,14 +51,6 @@ const Header = ({ currentUser }) => (
                 </div>
                 </Link>
 
-                {/* <IconButton>
-                    <AddIcon />
-                </IconButton>
-
-                <IconButton>
-                    <MessageIcon />
-                </IconButton> */}
-                
                 <NotificationIcon userId={currentUser.id} />
 
                 {/* <DropdownButton currentUser={currentUser} />  */}
