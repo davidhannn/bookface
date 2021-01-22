@@ -81,7 +81,7 @@ export function* fetchNotifications() {
 export function* editUserDetail({ payload: { currentUser, userDetail } }) {
     try {
         const user = yield select(selectors.selectCurrentUser)
-        const data = yield firestore.collection('userDetails').doc(user.id).set({
+        yield firestore.collection('userDetails').doc(user.id).set({
             bio: userDetail.bio,
             education: userDetail.education,
             location: userDetail.location
