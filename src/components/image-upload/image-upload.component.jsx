@@ -4,7 +4,6 @@ import { createStructuredSelector } from 'reselect'
 
 import { firestore, storage } from '../../firebase/firebase.utils';
 
-import firebase from 'firebase';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 
 const ImageUpload = ({ currentUser: { id }}) => {

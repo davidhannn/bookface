@@ -1,8 +1,8 @@
-import React, {  useEffect, useState, Fragment } from 'react'
+import React, {  useEffect, useState } from 'react'
 import { connect } from 'react-redux';
 import Post from '../../components/post/post.component';
 
-import { auth, firestore } from '../../firebase/firebase.utils';
+import { firestore } from '../../firebase/firebase.utils';
 
 import './feed.styles.scss';
 import { createStructuredSelector } from 'reselect';

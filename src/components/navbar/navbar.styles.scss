@@ -19,29 +19,6 @@ ul {
     text-decoration: none;;
   }
   
-//   .navbar {
-//     height: $nav-size;
-//     background-color: $bg;
-//     padding: 0 1rem;
-//     display: flex;
-//     justify-content: flex-end;
-//   }
-
-//   .navbar-nav {
-//       max-width: 100%;
-//       height: 100%;
-//       display: flex;
-//       flex-direction: row;
-//       justify-content: flex-end;
-//   }
-
-//   .nav-item {
-//       width: calc(var($nav-size) * 0.8);
-//       display: flex;
-//       align-items: center;
-//       justify-content: center;
-//   }
-
   .icon-button {
       --button-size: calc(var($nav-size) * 0.5);
       width: var(--button-size);
@@ -70,7 +47,7 @@ ul {
   /* Dropdown Menu */
   .dropdown {
       position: absolute;
-      top: 34px;
+      top: 40px;
       width: 300px;
       transform: translateX(-45%);
       background-color: $border;

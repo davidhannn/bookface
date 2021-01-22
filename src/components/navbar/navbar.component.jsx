@@ -5,17 +5,9 @@ import { createStructuredSelector } from 'reselect'
 
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
-import { Link } from 'react-router-dom'
-import Avatar from '../avatar/avatar.component'
+
 import './navbar.styles.scss';
-import { ReactComponent as BellIcon } from '../../icons/bell.svg';
-import { ReactComponent as MessengerIcon } from '../../icons/messenger.svg';
 import { ReactComponent as CaretIcon } from '../../icons/caret.svg';
-import { ReactComponent as PlusIcon } from '../../icons/plus.svg';
-import { ReactComponent as CogIcon } from '../../icons/cog.svg';
-import { ReactComponent as ChevronIcon } from '../../icons/chevron.svg';
-import { ReactComponent as ArrowIcon } from '../../icons/arrow.svg';
-import { ReactComponent as BoltIcon } from '../../icons/bolt.svg';
 import { ReactComponent as Logout } from '../../icons/logout.svg';
 import { ReactComponent as User } from '../../icons/user.svg';
 

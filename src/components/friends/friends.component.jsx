@@ -1,8 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import Avatar from '../avatar/avatar.component'
-import { firestore, getUsers } from '../../firebase/firebase.utils'
+import { firestore } from '../../firebase/firebase.utils'
 
 import { ReactComponent as UserIcon } from '../../icons/user.svg'
 import './friends.styles.scss'
@@ -42,7 +41,7 @@ const Friends = ({ userId }) => {
                         <Link to={`${friendId}`} >
                     <div className="friend-container-single">
 
-                            { profileImgUrl ? <img src={profileImgUrl} className="friend-container-image"/> : <UserIcon /> }
+                            { profileImgUrl ? <img src={profileImgUrl} className="friend-container-image" alt="friend profile"/> : <UserIcon /> }
                             <span>{firstName} {lastName}</span>
                     </div>
                     </Link>

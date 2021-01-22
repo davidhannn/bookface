@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import firebase from 'firebase';
 import './create-post.styles.scss';
 
 import VideocamIcon from '@material-ui/icons/Videocam';
@@ -10,7 +9,6 @@ import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 
 import { Avatar } from '@material-ui/core';
 
-import { firestore } from '../../firebase/firebase.utils';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 
 import { createPostStart } from '../../redux/post/post.actions';

@@ -1,28 +1,18 @@
 import React from 'react'
-import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './header.component.styles.scss';
 import { createStructuredSelector } from 'reselect'
 
-import { auth } from '../../firebase/firebase.utils';
-
 import HomeIcon from '@material-ui/icons/Home';
-import SearchIcon from '@material-ui/icons/Search';
-import VideoLabelIcon from '@material-ui/icons/VideoLabel';
-import StorefrontIcon from '@material-ui/icons/Storefront';
-import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
-import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
-import AddIcon from '@material-ui/icons/Add';
-import { Avatar, IconButton } from '@material-ui/core';
-import MessageIcon from '@material-ui/icons/Message';
-import NotificationsIcon from '@material-ui/icons/Notifications'
+import { Avatar } from '@material-ui/core';
+
+import { ReactComponent as FacebookIcon } from '../../icons/facebook.svg';
 
 import Search from '../search/search.component';
 import NotificationIcon from '../notification-icon/notification-icon.component';
 import Navbar from '../navbar/navbar.component.jsx'
 
-import DropdownButton from '../dropdown-button/dropdown-button.component';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 
 const Header = ({ currentUser }) => (
@@ -32,7 +22,8 @@ const Header = ({ currentUser }) => (
 
             <div className="header__left">
                 <Link to="/">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/1920px-Facebook_f_logo_%282019%29.svg.png" />
+                    {/* <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/1920px-Facebook_f_logo_%282019%29.svg.png" /> */}
+                    <FacebookIcon />
                 </Link>
                     <Search />
             </div>
@@ -52,10 +43,7 @@ const Header = ({ currentUser }) => (
                 </Link>
 
                 <NotificationIcon userId={currentUser.id} />
-{/* 
-                <DropdownButton currentUser={currentUser} />  */}
                 <Navbar />
-
             </div>
         </div>
  

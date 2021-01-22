@@ -78,8 +78,6 @@ const EditProfile = ({ currentUser, editUserDetailStart, userId }) => {
     editUserDetailStart(currentUser, userDetail)
   }
 
-  // const { bio, location, education } = userDetail
-
   return (
     <div className="edit-button-container">
       <button type="edit-button" className={classes.button} onClick={handleOpen}>

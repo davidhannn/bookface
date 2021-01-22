@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -13,11 +13,8 @@ import FriendPage from './pages/FriendPage/friendpage.component';
 import SearchPage from './pages/SearchPage/searchpage.component';
 import PostPage from './pages/PostPage/postpage.component';
 
-import { setCurrentUser, checkUserSession } from './redux/user/user.actions';
+import { checkUserSession } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selectors';
-import { CheckCircleOutline } from '@material-ui/icons';
-
-import Spinner from './components/spinner/spinner.component.jsx'
 
 const App = ({ checkUserSession, currentUser }) => {
 
@@ -31,21 +28,13 @@ const App = ({ checkUserSession, currentUser }) => {
         <Route exact path="/" render={() => currentUser ? (<HomePage />) : (<Redirect to="/login" />) }  />
         <Route path='/login' render={() => currentUser ? (<Redirect to="/" />) : (<LoginPage />)} />
         <Route path='/register' render={() => currentUser ? (<Redirect to="/" />): (<RegisterPage />)} />
-        { 
-                 currentUser ? <Route exact path='/user/:userId' render={({match}) => {
-                      const userId = match.params.userId;
-                      return (  currentUser.id === userId ? (<UserPage match={match}/>) : (<FriendPage match={match}/>) )
-                        }
-                      }/> : <Route path="/login" component={LoginPage} />
-        }
-
-      {/* <Route exact path='/user/:userId' render={({match}) => {
-                      const userId = match.params.userId;
-                      return (  currentUser.id === userId ? (<UserPage match={match}/>) : (<FriendPage match={match}/>) )
-                        }
-                      }/> */}
-{/* 
-        <Route exact path='/user/:userId' render={() => (<UserPage />)} /> */}
+          { 
+                  currentUser ? <Route exact path='/user/:userId' render={({match}) => {
+                        const userId = match.params.userId;
+                        return (  currentUser.id === userId ? (<UserPage match={match}/>) : (<FriendPage match={match}/>) )
+                          }
+                        }/> : <Route path="/login" component={LoginPage} />
+          }
         <Route path='/search/:text' component={SearchPage} />
         <Route path='/post/:postId' component={PostPage} />
       </Switch>
