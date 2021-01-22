@@ -64,12 +64,13 @@ $button-color: #eff2f5;
   }
 }
 
-@media screen and (max-width: 530px) {
-   .createPost__button {
-    padding: 10px;
+@media screen and (max-width: 550px) {
+  .createPost__bottom {
     display: flex;
-    align-items: center;
-    color: gray;
-    margin: 5px;
+    justify-content: space-around;
+
+    .createPost__button {
+      padding: 5px;
    }
+  }
 }

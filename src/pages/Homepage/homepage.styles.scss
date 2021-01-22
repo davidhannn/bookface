@@ -14,3 +14,16 @@
     width: 500px;
   }
 }
+
+@media screen and (max-width: 550px) {
+  .homepage__body {
+    width: 450px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .homepage__body {
+    width: 350px;
+  }
+}
+
