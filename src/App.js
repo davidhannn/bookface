@@ -7,7 +7,7 @@ import { createStructuredSelector } from 'reselect'
 
 import LoginPage from './pages/AuthPages/loginpage.component.jsx';
 import RegisterPage from './pages/AuthPages/registerpage.component.jsx';
-import HomePage from './pages/HomePage/homepage.component';
+import HomePage from './pages/Homepage/homepage.component';
 import UserPage from './pages/UserPage/userpage.component';
 import FriendPage from './pages/FriendPage/friendpage.component';
 import SearchPage from './pages/SearchPage/searchpage.component';
