@@ -43,7 +43,8 @@ $button-color: #eff2f5;
 .createPost__bottom {
   display: flex;
   justify-content: space-evenly;
-
+  width: 100%;
+  
   .createPost__button {
     padding: 20px;
     display: flex;
@@ -71,6 +72,17 @@ $button-color: #eff2f5;
 
     .createPost__button {
       padding: 5px;
+   }
+  }
+}
+
+@media screen and (max-width: 455px) {
+  .createPost__bottom {
+    display: flex;
+    justify-content: space-around;
+
+    .createPost__button:nth-of-type(2) {
+      display: none;
    }
   }
 }

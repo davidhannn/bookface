@@ -152,15 +152,19 @@ const Post = ({ postId, currentUser, data: { userId, image, message, profilePic,
                     <IconButton onClick={handleLike}>
                         { likeStatus === "liked" ? <ThumbUpIcon style={{ fill: "blue" }} /> : <ThumbUpIcon/> }
                     </IconButton>
-                    <p>Like</p>
+                    <span>Like</span>
                 </div>
                 <div className="post__button">
-                    <ChatBubbleIcon />
-                    <p>Comment</p>
+                    <IconButton>
+                        <ChatBubbleIcon />
+                    </IconButton>
+                        <span>Comment</span>
                 </div>
                 <div className="post__button">
-                    <ShareIcon />
-                    <p>Share</p>
+                    <IconButton>
+                        <ShareIcon />
+                    </IconButton>
+                        <span>Share</span>
                 </div>
             </div>
 
