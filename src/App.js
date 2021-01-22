@@ -23,22 +23,29 @@ const App = ({ checkUserSession, currentUser }) => {
 
   useEffect(() => {
     checkUserSession();
-  }, [])
+  }, [checkUserSession])
  
   return (
     <div className="App">
       <Switch>
         <Route exact path="/" render={() => currentUser ? (<HomePage />) : (<Redirect to="/login" />) }  />
         <Route path='/login' render={() => currentUser ? (<Redirect to="/" />) : (<LoginPage />)} />
-        <Route path='/register' component={RegisterPage} />
+        <Route path='/register' render={() => currentUser ? (<Redirect to="/" />): (<RegisterPage />)} />
         { 
                  currentUser ? <Route exact path='/user/:userId' render={({match}) => {
                       const userId = match.params.userId;
                       return (  currentUser.id === userId ? (<UserPage match={match}/>) : (<FriendPage match={match}/>) )
                         }
-                      }/> : null
+                      }/> : <Route path="/login" component={LoginPage} />
         }
 
+      {/* <Route exact path='/user/:userId' render={({match}) => {
+                      const userId = match.params.userId;
+                      return (  currentUser.id === userId ? (<UserPage match={match}/>) : (<FriendPage match={match}/>) )
+                        }
+                      }/> */}
+{/* 
+        <Route exact path='/user/:userId' render={() => (<UserPage />)} /> */}
         <Route path='/search/:text' component={SearchPage} />
         <Route path='/post/:postId' component={PostPage} />
       </Switch>

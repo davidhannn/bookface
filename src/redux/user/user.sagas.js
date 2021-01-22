@@ -4,7 +4,7 @@ import * as selectors from './user.selectors';
 
 import UserActionTypes from './user.types';
 
-import { signInSuccess, signInFailure, signOutSuccess, signOutFailure, fetchNotificationsSuccess, fetchNotificationsFailure, editUserDetailSuccess, editUserDetailFailure } from './user.actions'
+import { signInSuccess, signUpSuccess, signUpFailure, signInFailure, signOutSuccess, signOutFailure, fetchNotificationsSuccess, fetchNotificationsFailure, editUserDetailSuccess, editUserDetailFailure } from './user.actions'
 
 import { auth, firestore, googleProvider, createUserProfileDocument, getCurrentUser, convertCollectionsSnapshotToMap } from '../../firebase/firebase.utils';
 
@@ -92,8 +92,25 @@ export function* editUserDetail({ payload: { currentUser, userDetail } }) {
     }
 }
 
+export function* signUp({ payload: { email, password, firstName, lastName }}) {
+    try {
+        const { user } = yield auth.createUserWithEmailAndPassword(email, password);
+        yield put(signUpSuccess({ user, additionalData: { email, firstName, lastName }}))
+    } catch(error) {
+        yield put(signUpFailure(error))
+    }
+}
+
+export function* signInAfterSignUp({ payload: { user, additionalData}} ) {
+    yield getSnapshotFromUserAuth(user, additionalData)
+}
+
 export function* onGoogleSignInStart() {  
     yield takeLatest(UserActionTypes.GOOGLE_SIGN_IN_START, signInWithGoogle)
+}
+
+export function* onSignUpStart() {
+    yield takeLatest(UserActionTypes.SIGN_UP_START, signUp)
 }
 
 export function* onEmailSignInStart() {
@@ -108,6 +125,10 @@ export function* onSignOutStart() {
     yield takeLatest(UserActionTypes.SIGN_OUT_START, signOut)
 }
 
+export function* onSignUpSuccess() {
+    yield takeLatest(UserActionTypes.SIGN_UP_SUCCESS, signInAfterSignUp)
+}
+
 export function* onFetchNotificationsStart() {
     yield takeLatest(UserActionTypes.FETCH_NOTIFICATIONS_START, fetchNotifications)
 }
@@ -117,5 +138,5 @@ export function* onEditUserDetailStart() {
 }
 
 export function* userSagas() {
-    yield all([call(onGoogleSignInStart), call(onEmailSignInStart), call(onCheckUserSession), call(onSignOutStart), call(onFetchNotificationsStart), call(onEditUserDetailStart)])
+    yield all([call(onSignUpStart), call(onEmailSignInStart), call(onCheckUserSession), call(onSignOutStart), call(onSignUpSuccess), call(onFetchNotificationsStart), call(onEditUserDetailStart)])
 }

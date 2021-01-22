@@ -45,13 +45,18 @@ const NavItem = (props) => {
 const DropDownMenu = ({ currentUser, signOutStart }) => {
     const history = useHistory();
 
+    const [activeMenu, setActiveMenu] = useState('main')
+
     const [open, setOpen] = useState(false);
 
     const handleClickAway = () => {
         setOpen(false);
     };
 
-    const [activeMenu, setActiveMenu] = useState('main')
+    const handleLogout = async () => {
+        await signOutStart();
+        history.push("/login")
+    }
 
     function DropdownItem(props) {
         return (
@@ -75,7 +80,7 @@ const DropDownMenu = ({ currentUser, signOutStart }) => {
                     <DropdownItem leftIcon={<User />} action={() => history.push(`/user/${currentUser.id}`)}> 
                             My Profile
                     </DropdownItem>
-                    <DropdownItem leftIcon={<Logout />} action={() => signOutStart()}>Sign Out</DropdownItem>
+                    <DropdownItem leftIcon={<Logout />} action={handleLogout}>Sign Out</DropdownItem>
                 </div>
 
             </CSSTransition>

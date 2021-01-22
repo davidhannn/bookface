@@ -3,11 +3,11 @@ import { connect } from 'react-redux'
 import { auth } from '../../firebase/firebase.utils';
 
 import TextField from '@material-ui/core/TextField';
-import { googleSignInStart, emailSignInStart } from '../../redux/user/user.actions';
+import {  emailSignInStart } from '../../redux/user/user.actions';
 
 import './loginpage.styles.scss';
 
-const LoginPage = ({ googleSignInStart, emailSignInStart }) => {
+const LoginPage = ({ emailSignInStart }) => {
     const [loginCredentials, setLoginCredentials] = useState({ email: '', password: '' })
 
     const { email, password } = loginCredentials;
@@ -37,7 +37,6 @@ const LoginPage = ({ googleSignInStart, emailSignInStart }) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-    googleSignInStart: () => dispatch(googleSignInStart()),
     emailSignInStart: (email, password) => dispatch(emailSignInStart({ email, password }))
 })
 

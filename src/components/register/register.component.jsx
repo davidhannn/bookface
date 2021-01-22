@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-// import { signUp } from '../../redux/user/user.actions.js';
+import { signUpStart } from '../../redux/user/user.actions.js';
 import TextField from '@material-ui/core/TextField';
 
 import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
 import './register.styles.scss';
 
-const Register = () => {
+const Register = ({ signUpStart }) => {
     const [userCredentials, setUserCredentials] = useState({ firstName: "", lastName: "", email: "", password: "", confirmPassword: "" });
 
     const { firstName, lastName, email, password, confirmPassword } = userCredentials;
@@ -14,18 +14,23 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        try {
-            const { user } = await auth.createUserWithEmailAndPassword(email, password);
-
-            await createUserProfileDocument(user, { firstName, lastName, email});
-
-            setUserCredentials({ firstName: "", lastName: "", email: "", password: "", confirmPassword: "" })
-        
-        } catch (error) {
-            console.error(error);
+        if(password !== confirmPassword) {
+            alert("Passwords don't match")
+            return;
         }
 
-        // signUp({ firstName, lastName, email, password});
+        // try {
+        //     const { user } = await auth.createUserWithEmailAndPassword(email, password);
+
+        //     await createUserProfileDocument(user, { firstName, lastName, email});
+
+        //     setUserCredentials({ firstName: "", lastName: "", email: "", password: "", confirmPassword: "" })
+        
+        // } catch (error) {
+        //     console.error(error);
+        // }
+
+        signUpStart({ firstName, lastName, email, password});
     }
 
     const handleChange = (e) => {
@@ -50,8 +55,8 @@ const Register = () => {
     )
 }
 
-// const mapDispatchToProps = dispatch => {
-//     signUp: userCredentials => dispatch(signUp(userCredentials))
-// }
+const mapDispatchToProps = dispatch => ({
+    signUpStart: userCredentials => dispatch(signUpStart(userCredentials))
+})
 
-export default Register;
+export default connect(null, mapDispatchToProps)(Register);

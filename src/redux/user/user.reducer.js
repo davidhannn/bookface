@@ -16,6 +16,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
                 error: null
             }
         case UserActionTypes.SIGN_IN_FAILURE:
+        case UserActionTypes.SIGN_UP_FAILURE:
         case UserActionTypes.SIGN_OUT_FAILURE:
         case UserActionTypes.FETCH_NOTIFICATIONS_FAILURE:
         case UserActionTypes.EDIT_USER_DETAIL_FAILURE:
