@@ -5,7 +5,6 @@ import { createStructuredSelector } from 'reselect'
 import { ReactComponent as BellIcon } from '../../icons/bell.svg';
 
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import NotificationsIcon from '@material-ui/icons/Notifications'
 // import { IconButton } from '@material-ui/core';
 // import Badge from '@material-ui/core/Badge';
 
@@ -34,12 +33,12 @@ const NotificationIcon = ({ currentUser, fetchNotificationsStart, notifications 
                 };
         return (
             <ClickAwayListener onClickAway={handleClickAway}>
-                <a href="#" className="icon-button" onClick={() => setOpen(!open)}>
+                <div href="#" className="icon-button" onClick={() => setOpen(!open)}>
                     <BellIcon />
         
                     {open && props.children}
         
-                </a>
+                </div>
             </ClickAwayListener>
         )
     }

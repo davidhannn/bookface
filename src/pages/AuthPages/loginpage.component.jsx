@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { auth } from '../../firebase/firebase.utils';
 
 import TextField from '@material-ui/core/TextField';
 import {  emailSignInStart } from '../../redux/user/user.actions';
@@ -27,8 +26,8 @@ const LoginPage = ({ emailSignInStart }) => {
         <div className="login-page">
         <form onSubmit={handleSubmit} className="login-container">
             <h3>Sign In To BookFace</h3>
-            <TextField name="email" type="email" value={email} label="email" onChange={handleChange} required id="outline-required" label="Email" variant="outlined" defaultValue="" />
-            <TextField name="password" type="password" value={password} label="password" onChange={handleChange} required id="outline-required" label="Password" variant="outlined" defaultValue="" />
+            <TextField name="email" type="email" value={email} label="Email" onChange={handleChange} required id="outline-required" variant="outlined" defaultValue="" />
+            <TextField name="password" type="password" value={password} label="Password" onChange={handleChange} required id="outline-required" variant="outlined" defaultValue="" />
                 <button type="submit" className="sign-in-button">Sign In</button>
                 <p>Not a member? <a href="/register"><span style={{ color: '#2e81f4' }}>Sign Up Now</span></a></p>
         </form>

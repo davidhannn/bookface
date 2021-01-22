@@ -1,18 +1,14 @@
 import React, { useEffect, useState, Fragment } from 'react'
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import ImageUpload from '../../components/image-upload/image-upload.component';
+
+
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 import Header from '../../components/header/header.component'
 import Feed from '../../components/feed/feed.component'
 
-import { IconButton, Avatar } from '@material-ui/core';
 import CameraModel from '../../components/modal/modal.component';
 import ImageAvatar from '../../components/avatar/avatar.component'
-import PersonAddIcon from '@material-ui/icons/PersonAdd';
-
-import Post from '../../components/post/post.component';
-import AddFriendButton from '../../components/add-friend-button/add-friend-button';
 
 import About from '../../components/about/about.component'
 import CreatePost from '../../components/create-post/create-post.component'

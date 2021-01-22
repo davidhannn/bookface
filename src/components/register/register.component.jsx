@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { signUpStart } from '../../redux/user/user.actions.js';
 import TextField from '@material-ui/core/TextField';
 
-import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
 import './register.styles.scss';
 
 const Register = ({ signUpStart }) => {
@@ -18,17 +17,6 @@ const Register = ({ signUpStart }) => {
             alert("Passwords don't match")
             return;
         }
-
-        // try {
-        //     const { user } = await auth.createUserWithEmailAndPassword(email, password);
-
-        //     await createUserProfileDocument(user, { firstName, lastName, email});
-
-        //     setUserCredentials({ firstName: "", lastName: "", email: "", password: "", confirmPassword: "" })
-        
-        // } catch (error) {
-        //     console.error(error);
-        // }
 
         signUpStart({ firstName, lastName, email, password});
     }

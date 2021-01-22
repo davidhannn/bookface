@@ -66,16 +66,6 @@ export const getUsers = async ({ userIds }) => {
     console.log(users.map(doc => doc.data()))
 }
 
-// export const getUserData = async (userId) => {
-
-//     try {
-//         const userData = firestore.collection('users').where('__name__', '==', userId).get()
-//         return userData;
-//     } catch(error) {
-//         console.error(error)
-//     }
-// }
-
   export const auth = firebase.auth();
   export const firestore = firebase.firestore();
   export const storage = firebase.storage();
