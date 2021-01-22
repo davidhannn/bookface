@@ -1,0 +1,16 @@
+.homepage__body {
+  margin: 0 auto;
+  width: 800px;
+}
+
+@media screen and (max-width: 875px) {
+    .homepage__body {
+      width: 600px;
+    }
+}
+
+@media screen and (max-width: 650px) {
+  .homepage__body {
+    width: 500px;
+  }
+}
