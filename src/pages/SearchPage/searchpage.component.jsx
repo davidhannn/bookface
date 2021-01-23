@@ -28,7 +28,7 @@ const SearchPage = ({ match }) => {
         <Fragment>
             <Header />
             <div className="search">
-                <h5>People</h5>
+                <h4 className="search-title">People</h4>
                     <div className="search-people">
                         {searchedUsers.map((user) => (
                             <UserCard id={user.id} data={user.data} />

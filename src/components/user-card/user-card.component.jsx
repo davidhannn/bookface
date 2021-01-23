@@ -13,7 +13,7 @@ const UserCard = ({ id, data: { firstName, lastName, profileImgUrl } }) => {
                 </div>
              </Link>
              <Link to={`/user/${id}`} style={{ textDecoration: "none" }}>
-                <h6>{firstName} {lastName}</h6>
+                <span>{firstName} {lastName}</span>
             </Link>
         </div>
     )
