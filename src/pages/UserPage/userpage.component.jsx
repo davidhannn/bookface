@@ -19,23 +19,24 @@ import { firestore } from '../../firebase/firebase.utils';
 
 const UserPage = ({ match, currentUser }) => {
     const [user, setUser] = useState({})
-    const [activeButton, setActiveButton] = useState({
-        activeObject: null,
-        objects: [{ id : "Posts" }, { id: "About" }, { id: "Friends" }, { id: "Photos" }]
-    })
+    // const [activeButton, setActiveButton] = useState({
+    //     activeObject: null,
+    //     objects: [{ id : "Posts" }, { id: "About" }, { id: "Friends" }, { id: "Photos" }]
+    // })
 
     const {  profileImgUrl, firstName, lastName } = user;
-    const toggleActive = (idx) => {
-        setActiveButton({ ...activeButton, activeObject: activeButton.objects[idx]})
-    }
 
-    const toggleActiveStyles = (idx) => {
-        if(activeButton.objects[idx] === activeButton.activeObject) {
-            return "box active"
-          }  else {
-            return "box inactive"
-        }
-        }
+    // const toggleActive = (idx) => {
+    //     setActiveButton({ ...activeButton, activeObject: activeButton.objects[idx]})
+    // }
+
+    // const toggleActiveStyles = (idx) => {
+    //     if(activeButton.objects[idx] === activeButton.activeObject) {
+    //         return "box active"
+    //       }  else {
+    //         return "box inactive"
+    //     }
+    //     }
     
 
 
@@ -63,11 +64,11 @@ const UserPage = ({ match, currentUser }) => {
 
                 <div className="userpage__headerBottom">
                     <div className="userpage__headerBottomButtons">
-                        <div className="userpage__headerBottomButtonsLeft">
+                        {/* <div className="userpage__headerBottomButtonsLeft">
                             {activeButton.objects.map((el, idx) => (
                                 <button key={idx} className={toggleActiveStyles(idx)} onClick={() => toggleActive(idx) } >{el.id}</button>
                         ))}
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
