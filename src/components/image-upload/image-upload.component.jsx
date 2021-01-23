@@ -6,6 +6,8 @@ import { firestore, storage } from '../../firebase/firebase.utils';
 
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 
+import './image-upload.styles.scss';
+
 const ImageUpload = ({ currentUser: { id }}) => {
 
     console.log(id);
@@ -45,7 +47,7 @@ const ImageUpload = ({ currentUser: { id }}) => {
         <div>
         <form onSubmit={handleUpload}>
           <input type="file" onChange={handleChange} />
-          <button disabled={!file}>Upload Photo</button>
+          <button className="image-upload-button" disabled={!file}>Upload Photo</button>
         </form>
         <img src={url} alt="" />
       </div>

@@ -1,0 +1,19 @@
+.file-button {
+    border-style: none;
+    padding: 2px 8px;
+    height: 35px;
+    border-radius: 6px;
+}
+
+.image-upload-button {
+    padding: 2px 8px;
+    height: 35px;
+    border-radius: 6px;
+    color: black;
+}
+
+@media screen and (max-width: 510px) {
+    .image-upload-button {
+    margin-top: 10px;
+    }
+}
