@@ -38,9 +38,9 @@ ul {
           height: 20px;
       }
 
-      &:hover {
-          filter: brightness(1.2)
-      }
+    //   &:hover {
+    //       filter: brightness(1.2)
+    //   }
   }
 
 
@@ -66,9 +66,9 @@ ul {
       padding: 0.5rem;
       color: black;
 
-      &:hover {
-          background-color: lightgray;
-      }
+    //   &:hover {
+    //       background-color: lightgray;
+    //   }
   }
 
   .icon-right {
@@ -79,25 +79,25 @@ ul {
       width: 100%;
   }
 
-  .menu-primary-enter {
-    position: absolute;
-    transform: translateX(-110%);
-  }
+//   .menu-primary-enter {
+//     position: absolute;
+//     transform: translateX(-110%);
+//   }
 
-  .menu-primary-enter-active {
-      transform: translateX(0%);
-      transition: all $speed ease;
-}
+//   .menu-primary-enter-active {
+//       transform: translateX(0%);
+//       transition: all $speed ease;
+// }
 
-.menu-primary-exit {
-    position: absolute;
-}
+// .menu-primary-exit {
+//     position: absolute;
+// }
 
-.menu-primary-exit-active {
-      transform: translateX(-110%);
-}
+// .menu-primary-exit-active {
+//       transform: translateX(-110%);
+// }
 
-.menu-primary-exit-active {
-    transform: translateX(-110%);
-    transition: all $speed ease;
-}
+// .menu-primary-exit-active {
+//     transform: translateX(-110%);
+//     transition: all $speed ease;
+// }

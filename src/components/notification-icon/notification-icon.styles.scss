@@ -7,21 +7,8 @@ $border: 1px solid #474a4d;
 $border-radius: 8px;
 $speed: 500ms; 
 
-
-// ul {
-//     list-style: none;
-//     margin: 0;
-//     padding: 0;
-// }
-
-// a {
-//     text-decoration: none;
-// }
-
-
-
 .icon-button {
-    --button-size: calc(var($nav-size) * 0.5);
+    // --button-size: calc(var($nav-size) * 0.5);
     width: var(--button-size);
     height: var(--button-size);
     background-color: lightgray;
@@ -39,17 +26,20 @@ $speed: 500ms;
 
 .notification-dropdown {
     position: absolute;
-    top: 65px;
+    top: 55px;
     width: 400px;
-    transform: translateX(-30%);
+    transform: translateX(-33%);
     background-color: white;
     border-radius: 8px;
     padding: 0.3rem;
-    overflow: hidden;
-    z-index: 200;
+    z-index: 200 !important;
 }
 
 .notification-title {
     font-size: 26px;
-    padding: 8px 8px;
+    position: relative;
+    font-weight: bold;
+    top: 10px;
+    left: 20px;
 }
+

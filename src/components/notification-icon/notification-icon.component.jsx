@@ -44,17 +44,17 @@ const NotificationIcon = ({ currentUser, fetchNotificationsStart, notifications 
     }
 
     const NotificationDropdown = () => {
-        const [read, setRead] = useState(false);
+        // const [read, setRead] = useState(false);
 
         return (
-            <div className='notification-dropdown'>
-                <div className="notification-title">Notifications</div>
+            <div className="notification-dropdown">
+                <div className="notification-title">Notifications</div> 
                 <ul>
                     {notifications && notifications.map((singleNotification, id) => {
                         return (
                             <NotificationDropdownItem id={singleNotification.id} NotificationInfo={singleNotification.data} />
                         )
-                         })}
+                    })}
                 </ul>
             </div>
         )

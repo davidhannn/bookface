@@ -80,7 +80,7 @@ const NotificationDropdownItem = ({ NotificationInfo }) => {
 
                 <Avatar src={profileImgUrl} alt="" />      
                         <div className="notification-dropdown-text">
-                                <span style={{fontWeight: "bold"}}>{firstName} {lastName} &nbsp;liked your post</span>
+                                <span><span style={{fontWeight: "bold"}}>{firstName} {lastName}</span> liked your post</span>
                         </div>
                 </a> : 
             type == "comment" ?  
@@ -88,7 +88,7 @@ const NotificationDropdownItem = ({ NotificationInfo }) => {
 
                 <Avatar src={profileImgUrl} alt="" />      
                         <div className="notification-dropdown-text">
-                                <span style={{fontWeight: "bold"}}>{firstName} {lastName} &nbsp;commented on your post</span>
+                                <span style={{fontWeight: "bold"}}>{firstName} {lastName} commented on your post</span>
                         </div>
             </a> : 
 
