@@ -37,7 +37,8 @@ const NotificationDropdownItem = ({ NotificationInfo }) => {
     
 
     const handleClick = (e) => {
-    
+        
+        const notificationRef = firestore.collection('notifications').where('sender', '==', sender).where('recipient', '==', recipient).where('type', '==', type);
 
         if (e.target.value === "confirm") {
             firestore.collection('friendships').doc(recipient).update({
@@ -48,6 +49,11 @@ const NotificationDropdownItem = ({ NotificationInfo }) => {
                 [recipient]: true
             })
 
+            
+            notificationRef.get().then((snapshot) => snapshot.forEach((doc) => {
+                doc.ref.delete();
+            }))
+
             setFriendRequestStatus("approve")
         } else if (e.target.value === "delete") {
             firestore.collection('friendships').doc(recipient).update({
@@ -57,6 +63,10 @@ const NotificationDropdownItem = ({ NotificationInfo }) => {
             firestore.collection('friendships').doc(sender).update({
                 [recipient]: false
             })
+
+            notificationRef.get().then((snapshot) => snapshot.forEach((doc) => {
+                doc.ref.delete();
+            }))
 
             setFriendRequestStatus("deny")
         }
