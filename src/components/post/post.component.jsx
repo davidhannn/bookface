@@ -139,9 +139,14 @@ const Post = ({ postId, currentUser, data: { userId, image, message, profilePic,
                 <p>{message}</p>
             </div>
 
-            <div className="post__image">
+            { image ?         
+                <div className="post__image">
+                    <img src={image} />
+                </div> : null 
+            }
+            {/* <div className="post__image">
                 <img src={image} />
-            </div>
+            </div> */}
 
             <div className="post__like">
                 <span>{likes} Likes</span>
@@ -160,12 +165,12 @@ const Post = ({ postId, currentUser, data: { userId, image, message, profilePic,
                     </IconButton>
                         <span>Comment</span>
                 </div>
-                <div className="post__button">
+                {/* <div className="post__button">
                     <IconButton>
                         <ShareIcon />
                     </IconButton>
                         <span>Share</span>
-                </div>
+                </div> */}
             </div>
 
             {
