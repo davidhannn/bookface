@@ -6,7 +6,7 @@
     justify-content: center;
     align-items: center;
     background: linear-gradient(180deg, #a7bef0, #FFFFFF);
-    padding: 30px 30px;
+    padding: 25px 25px;
 }
 
 .userpage__headerName {
@@ -28,6 +28,7 @@
 .userpage__headerBottom {
     width: 100%;
     margin-top: 50px;
+    position: relative;
 }
 
 .userpage__headerBottomButtons {
@@ -40,6 +41,9 @@
 
     .userpage__headerBottomButtonsRight {
         display: flex;
+        position: absolute;
+        bottom: 3px;
+        right: 3px;
     }
 }
 

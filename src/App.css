@@ -8,4 +8,10 @@
 
 .App {
   background-color: #eff2f5;
+
+}
+
+html, body {
+  margin: 0;
+  height: 100%;
 }

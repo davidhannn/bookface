@@ -22,7 +22,12 @@ const NavItem = (props) => {
 
     const [open, setOpen] = useState(false);
 
+    const handleClickAway = () => {
+        setOpen(false);
+    };
+
     return (
+        <ClickAwayListener onClickAway={handleClickAway}>
         <div className="nav-item">
             <a href="#" className="icon-button" onClick={() => setOpen(!open)}>
                 {props.icon}
@@ -30,6 +35,7 @@ const NavItem = (props) => {
 
             {open && props.children}
         </div>
+        </ClickAwayListener>
     )
 }
 
@@ -41,18 +47,20 @@ const DropDownMenu = ({ currentUser, signOutStart }) => {
 
     const [open, setOpen] = useState(false);
 
-    const handleClickAway = () => {
-        setOpen(false);
-    };
-
     const handleLogout = async () => {
         await signOutStart();
         history.push("/login")
     }
 
     function DropdownItem(props) {
+
+        const [open, setOpen] = useState(false);
+
+        const handleClickAway = () => {
+            setOpen(false);
+        };
+
         return (
-            <ClickAwayListener onClickAway={handleClickAway}>
             <a href="#" className="menu-item" onClick={props.action}>
                     <span className="icon-button">{props.leftIcon}</span>
  
@@ -60,11 +68,11 @@ const DropDownMenu = ({ currentUser, signOutStart }) => {
 
                     <span className="icon-right">{props.rightIcon}</span>
             </a>
-            </ClickAwayListener>
         )
     }
 
     return (
+ 
         <div className="dropdown">
             <CSSTransition in={activeMenu === 'main'} unmountOnExit timeout={500} className="menu-primary">
 
