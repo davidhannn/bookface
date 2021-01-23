@@ -27,7 +27,8 @@ const About = ({ userId, currentUser }) => {
             setUserInfo(snapshot.data())
             }
         })
-    }, [userInfo])
+        console.log(userInfo)
+    }, [])
 
     
 

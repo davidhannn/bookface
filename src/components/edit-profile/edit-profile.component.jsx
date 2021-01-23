@@ -18,10 +18,12 @@ import './edit-profile.styles.scss'
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
+      // display: 'flex',
+      // flexDirection: 'column',
+      // margin: theme.spacing(1),
+      // width: '25ch',
       display: 'flex',
-      flexDirection: 'column',
-      margin: theme.spacing(1),
-      width: '25ch',
+      flexWrap: 'wrap'
     },
   },
   modal: {
@@ -33,13 +35,19 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
+    padding: theme.spacing(2, 3, 4),
+    position: 'relative',
+    width: '350px',
+    height: '270px'
   },
   button: {
       width: "100%",
       borderStyle: 'none',
       padding: '10px 10px',
       borderRadius: '8px',
+  },
+  textField: {
+    width: '100ch',
   }
 }));
 
@@ -75,7 +83,8 @@ const EditProfile = ({ currentUser, editUserDetailStart, userId }) => {
 
   const handleClick = (e) => {
     e.preventDefault()
-    editUserDetailStart(currentUser, userDetail)
+    editUserDetailStart(currentUser, userDetail);
+    setOpen(false);
   }
 
   return (
@@ -98,10 +107,10 @@ const EditProfile = ({ currentUser, editUserDetailStart, userId }) => {
         <Fade in={open}>
           <div className={classes.paper}>
             <h2 id="transition-modal-title">Edit Details</h2>
-            <form className={classes.root} noValidate autoComplete="off">
-                <TextField id="outlined-basic" label="Bio" variant="outlined" name="bio" value={userDetail.bio} onChange={handleChange} fullWidth/>
-                <TextField id="outlined-basic" label="Current Location" variant="outlined"  name="location" value={userDetail.location} onChange={handleChange}/>
-                <TextField id="outlined-basic" label="Education" variant="outlined" name="education" value={userDetail.education} onChange={handleChange}/>
+              <form className={classes.root} noValidate autoComplete="off">
+                {/* <TextField className={classes.textField} id="outlined-basic" label="Bio" variant="outlined" name="bio" value={userDetail.bio} onChange={handleChange} fullWidth margin="normal"/> */}
+                <TextField className={classes.textField} id="outlined-basic" label="Education" variant="outlined" name="education" value={userDetail.education} onChange={handleChange}/>
+                <TextField className={classes.textField} id="outlined-basic" label="Current Location" variant="outlined"  name="location" value={userDetail.location} onChange={handleChange}/>
               </form>
               <div className="button-container">  
                   <button className="cancel-button" onClick={handleClose}>Cancel</button>
