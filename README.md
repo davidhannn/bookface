@@ -6,6 +6,8 @@ A Facebook clone that I developed using React-Redux and Firebase. Redux sagas we
 
 ## Gif
 
+![facebook-clone](https://user-images.githubusercontent.com/7605102/107319730-3e4d9100-6a54-11eb-9ecc-3b82e72abdf4.gif)
+
 Demo: https://bookface-app.netlify.app/
 
 #### Technologies
